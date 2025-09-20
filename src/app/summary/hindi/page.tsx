@@ -3,8 +3,45 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useState, useRef } from "react";
+import { textToSpeechAction } from "@/app/actions";
+import { useToast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
+
+
+const hindiSummaryText = `यह दस्तावेज़, मानक कुमार और राधिका शर्मा के बीच एक किराये का समझौता है। मानक कुमार संपत्ति के मालिक हैं और राधिका शर्मा किरायेदार हैं। समझौते में देर से भुगतान शुल्क या जमा राशि की वापसी की शर्तों का स्पष्ट रूप से उल्लेख नहीं है, जिससे भविष्य में विवाद हो सकते हैं। हम दोनों पक्षों को सलाह देते हैं कि वे समझौते की शर्तों पर फिर से बातचीत करें ताकि संभावित जोखिमों को कम किया जा सके और एक स्पष्ट समझौता सुनिश्चित हो सके।`
 
 export default function HindiSummaryPage() {
+  const [isReading, setIsReading] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { toast } = useToast();
+
+  const handleReadAloud = async () => {
+    if (isReading) {
+      audioRef.current?.pause();
+      audioRef.current = null;
+      setIsReading(false);
+      return;
+    }
+    
+    setIsReading(true);
+    try {
+      const audioDataUri = await textToSpeechAction(hindiSummaryText, 'hi-IN');
+      const audio = new Audio(audioDataUri);
+      audioRef.current = audio;
+      audio.play();
+      audio.onended = () => setIsReading(false);
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Failed to Read Aloud",
+        description: "Could not generate audio for the summary.",
+        variant: "destructive",
+      });
+      setIsReading(false);
+    }
+  };
+
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden bg-background text-foreground">
       <div className="flex-grow">
@@ -26,7 +63,10 @@ export default function HindiSummaryPage() {
             <h1 className="font-noto-sans-devanagari text-3xl font-bold">
               सारांश
             </h1>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 items-center">
+              <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isReading}>
+                  {isReading ? <Loader2 className="animate-spin" size={20}/> :  <span className="material-symbols-outlined"> volume_up </span>}
+              </button>
               <Link href="/">
                 <Button
                   variant="outline"

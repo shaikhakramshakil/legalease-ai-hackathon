@@ -5,6 +5,7 @@ import { highlightRiskyClauses } from '@/ai/flows/highlight-risky-clauses';
 import { translateLegalSummary } from '@/ai/flows/translate-legal-summary';
 import { chatWithDocument } from '@/ai/flows/chat-with-document';
 import { findKeyRisk } from '@/ai/flows/find-key-risk';
+import { textToSpeech } from '@/ai/flows/text-to-speech';
 import { z } from 'zod';
 
 const AnalyzeDocumentResponseSchema = z.object({
@@ -78,4 +79,18 @@ export async function chatAction(documentText: string, query: string) {
     console.error("Error in chatAction:", error);
     throw new Error("Failed to get chat response due to a server error.");
   }
+}
+
+export async function textToSpeechAction(text: string, language: 'en-US' | 'hi-IN') {
+    if (!text) {
+        throw new Error('Text for speech cannot be empty.');
+    }
+
+    try {
+        const result = await textToSpeech({ text, language });
+        return result.audioDataUri;
+    } catch(error) {
+        console.error("Error in textToSpeechAction:", error);
+        throw new Error("Failed to generate audio due to a server error.");
+    }
 }

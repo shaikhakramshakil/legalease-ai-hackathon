@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
+import { textToSpeechAction } from "@/app/actions";
 
 
 export type AnalysisResult = {
@@ -83,6 +84,8 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
   const detailsRefs = useRef<(HTMLDetailsElement | null)[]>([]);
   const { toast } = useToast();
   const [isShareSupported, setIsShareSupported] = useState(false);
+  const [isReading, setIsReading] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     if (navigator.share) {
@@ -112,6 +115,33 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
   const handleDownload = () => {
     window.print();
   };
+  
+  const handleReadAloud = async () => {
+    if (isReading) {
+      audioRef.current?.pause();
+      audioRef.current = null;
+      setIsReading(false);
+      return;
+    }
+    
+    setIsReading(true);
+    try {
+      const audioDataUri = await textToSpeechAction(result.summary, 'en-US');
+      const audio = new Audio(audioDataUri);
+      audioRef.current = audio;
+      audio.play();
+      audio.onended = () => setIsReading(false);
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Failed to Read Aloud",
+        description: "Could not generate audio for the summary.",
+        variant: "destructive",
+      });
+      setIsReading(false);
+    }
+  };
+
 
   const clauses = useMemo(() => parseHighlightedText(result.highlightedText), [result.highlightedText]);
   const riskyClausesCount = clauses.filter(c => c.type === 'risk').length;
@@ -202,7 +232,12 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
           </div>
         </div>
 
-        <h2 className="text-xl font-bold text-foreground mb-4">Plain-Language Summary</h2>
+        <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-foreground">Plain-Language Summary</h2>
+            <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isReading}>
+                {isReading ? <Loader2 className="animate-spin" size={20}/> :  <span className="material-symbols-outlined"> volume_up </span>}
+            </button>
+        </div>
         <div className="text-muted-foreground leading-relaxed mb-8">
             <p>{result.summary}</p>
         </div>
