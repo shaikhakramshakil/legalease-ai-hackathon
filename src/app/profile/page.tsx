@@ -14,8 +14,31 @@ import { TrendingTopicsChart } from "@/components/legalease/TrendingTopicsChart"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AppFooter } from "@/components/legalease/AppFooter";
+import { useToast } from "@/hooks/use-toast";
+import { analyzeDocumentAction } from "../actions";
 
 export default function ProfilePage() {
+  const { toast } = useToast();
+  const handleAnalyze = async (file: File) => {
+    try {
+      const text = await file.text();
+      // You may want to redirect to the main page or handle the result differently here
+      await analyzeDocumentAction(text);
+      toast({
+        title: "Analysis Started",
+        description: "Your document is being analyzed. You will be notified upon completion."
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Analysis Failed",
+        description: "There was an error analyzing your document.",
+        variant: "destructive",
+      });
+    }
+  };
+
+
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col text-white">
       
@@ -119,7 +142,7 @@ export default function ProfilePage() {
         </main>
       </div>
 
-      <AppFooter />
+      <AppFooter onFileSelect={handleAnalyze} />
     </div>
   );
 }

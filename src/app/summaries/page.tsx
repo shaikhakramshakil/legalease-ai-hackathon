@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { ArrowLeft, ChevronDown, CircleAlert, Search, Mic, FileText, BadgeCheck, ShieldAlert } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { AppFooter } from '@/components/legalease/AppFooter';
+import { analyzeDocumentAction } from '../actions';
 
 const summaries = [
   {
@@ -80,6 +81,25 @@ export default function SummariesPage() {
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef<any>(null);
   const { toast } = useToast();
+
+   const handleAnalyze = async (file: File) => {
+    try {
+      const text = await file.text();
+      // You may want to redirect to the main page or handle the result differently here
+      await analyzeDocumentAction(text);
+      toast({
+        title: "Analysis Started",
+        description: "Your document is being analyzed. You will be notified upon completion."
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Analysis Failed",
+        description: "There was an error analyzing your document.",
+        variant: "destructive",
+      });
+    }
+  };
 
 
   useEffect(() => {
@@ -313,7 +333,7 @@ export default function SummariesPage() {
         </div>
       </main>
 
-      <AppFooter />
+      <AppFooter onFileSelect={handleAnalyze} />
     </div>
   );
 }

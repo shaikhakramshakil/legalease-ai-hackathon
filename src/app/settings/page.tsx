@@ -5,9 +5,31 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { AppFooter } from '@/components/legalease/AppFooter';
+import { useToast } from '@/hooks/use-toast';
+import { analyzeDocumentAction } from '../actions';
 
 export default function SettingsPage() {
     const userAvatar = PlaceHolderImages.find(p => p.id === 'user-avatar');
+    const { toast } = useToast();
+    const handleAnalyze = async (file: File) => {
+        try {
+        const text = await file.text();
+        // You may want to redirect to the main page or handle the result differently here
+        await analyzeDocumentAction(text);
+        toast({
+            title: "Analysis Started",
+            description: "Your document is being analyzed. You will be notified upon completion."
+        });
+        } catch (error) {
+        console.error(error);
+        toast({
+            title: "Analysis Failed",
+            description: "There was an error analyzing your document.",
+            variant: "destructive",
+        });
+        }
+    };
+
 
     return (
         <div className="flex flex-col min-h-screen text-foreground">
@@ -139,7 +161,7 @@ export default function SettingsPage() {
                 </div>
             </main>
 
-            <AppFooter />
+            <AppFooter onFileSelect={handleAnalyze} />
         </div>
     );
 }
