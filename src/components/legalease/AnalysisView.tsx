@@ -177,10 +177,10 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
               </summary>
               <div className="clause-content px-4 pb-4">
                 <p className="text-muted-foreground text-sm leading-6 mb-4">{clause.content}</p>
-                <button className="w-full h-10 px-4 bg-black/5 dark:bg-white/10 text-foreground font-bold text-sm rounded-lg flex items-center justify-center gap-2 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+                <Link href="/clause" className="w-full h-10 px-4 bg-black/5 dark:bg-white/10 text-foreground font-bold text-sm rounded-lg flex items-center justify-center gap-2 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
                   <span className="material-symbols-outlined text-base"> smart_toy </span>
                   <span>Ask AI Assistant</span>
-                </button>
+                </Link>
               </div>
             </details>
           ))}
