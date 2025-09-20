@@ -290,8 +290,8 @@ export default function SummariesPage() {
                 <div className="bg-accent p-4 rounded-xl flex flex-col gap-3 transition-colors hover:bg-accent/80">
                     <div className="flex justify-between items-start">
                         <h3 className="font-bold text-base text-foreground pr-4">{summary.title}</h3>
-                        <span className={`flex items-center gap-1 text-sm font-medium px-2 py-0.5 rounded-full ${config.color}`}>
-                            <Icon className="h-4 w-4" />
+                        <span className={`flex items-center justify-center gap-1.5 text-sm font-medium w-28 py-1 rounded-full ${config.color}`}>
+                            <Icon className="h-3.5 w-3.5" />
                             <span>{config.label}</span>
                         </span>
                     </div>
