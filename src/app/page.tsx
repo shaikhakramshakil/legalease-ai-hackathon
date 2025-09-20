@@ -8,7 +8,6 @@ import { AnalysisView, type AnalysisResult } from "@/components/legalease/Analys
 import { analyzeDocumentAction } from "@/app/actions";
 import { sampleLegalText } from "@/lib/legal-text";
 import { Logo } from "@/components/legalease/Logo";
-import { Github } from "lucide-react";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -62,14 +61,6 @@ export default function Home() {
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Logo />
-          <a
-            href="https://github.com/firebase/studio-extra-sauce"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <Github />
-          </a>
         </div>
       </header>
       <main className="flex-grow container py-8 md:py-12">
