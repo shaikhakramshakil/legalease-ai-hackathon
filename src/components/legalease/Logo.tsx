@@ -7,7 +7,7 @@ export function Logo() {
         <Scale className="w-5 h-5" />
       </div>
       <span className="text-xl font-bold font-headline tracking-tight">
-        Legal Ease Ai
+        Legal Ease AI
       </span>
     </div>
   );
