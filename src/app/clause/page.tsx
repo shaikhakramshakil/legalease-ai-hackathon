@@ -1,6 +1,13 @@
 
 "use client";
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Chatbot } from "@/components/legalease/Chatbot";
 
 export default function ClausePage() {
     return (
@@ -8,7 +15,7 @@ export default function ClausePage() {
             <header className="bg-background p-4 border-b border-gray-800">
                 <div className="flex items-center">
                     <Link href="/" passHref>
-                        <button className="text-foreground">
+                        <button className="text-foreground p-2 -ml-2">
                             <span className="material-symbols-outlined">arrow_back_ios_new</span>
                         </button>
                     </Link>
@@ -71,10 +78,17 @@ export default function ClausePage() {
                 </section>
             </main>
             <footer className="sticky bottom-0 bg-background border-t border-border p-4">
-                <button className="w-full bg-primary text-primary-foreground font-bold py-4 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
-                    <span className="material-symbols-outlined">smart_toy</span>
-                    <span>Ask AI Assistant</span>
-                </button>
+                 <Sheet>
+                    <SheetTrigger asChild>
+                        <Button className="w-full bg-primary text-primary-foreground font-bold py-4 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
+                            <span className="material-symbols-outlined">smart_toy</span>
+                            <span>Ask AI Assistant</span>
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="bottom" className="h-screen w-screen flex flex-col p-0 border-0" hideClose={true}>
+                        <Chatbot documentText={""} />
+                    </SheetContent>
+                </Sheet>
             </footer>
         </div>
     );
