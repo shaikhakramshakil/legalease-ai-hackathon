@@ -64,7 +64,7 @@ export function AppFooter({ onFileSelect }: AppFooterProps) {
                     )}
                     >
                     {isActive && (
-                        <div className="absolute inset-0 bg-primary/10 rounded-full border border-primary/20"></div>
+                        <div className="absolute inset-0 bg-primary/10 rounded-full border border-primary/20 backdrop-blur-sm"></div>
                     )}
                     <div className="relative z-10 flex flex-col items-center gap-1">
                         <span
@@ -95,7 +95,7 @@ export function AppFooter({ onFileSelect }: AppFooterProps) {
                     )}
                     >
                     {isActive && (
-                        <div className="absolute inset-0 bg-primary/10 rounded-full border border-primary/20"></div>
+                        <div className="absolute inset-0 bg-primary/10 rounded-full border border-primary/20 backdrop-blur-sm"></div>
                     )}
                     <div className="relative z-10 flex flex-col items-center gap-1">
                         <span
