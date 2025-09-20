@@ -32,20 +32,7 @@ const prompt = ai.definePrompt({
   name: 'chatWithDocumentPrompt',
   input: {schema: ChatWithDocumentInputSchema},
   output: {schema: ChatWithDocumentOutputSchema},
-  prompt: `You are an AI legal assistant. You are an expert in Indian law.
-
-  A user has provided a legal document and is asking a question about it.
-  
-  Your task is to answer the user's question based on the content of the document.
-  Provide clear, concise, and easy-to-understand explanations.
-  Do not provide legal advice. You should frame your answers as informational and for educational purposes only.
-
-  Document Text:
-  {{{documentText}}}
-
-  User's Question:
-  {{{query}}}
-  `,
+  prompt: ``,
 });
 
 const chatWithDocumentFlow = ai.defineFlow(

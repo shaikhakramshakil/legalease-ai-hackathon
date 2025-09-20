@@ -32,18 +32,7 @@ const prompt = ai.definePrompt({
   name: 'findKeyRiskPrompt',
   input: {schema: FindKeyRiskInputSchema},
   output: {schema: FindKeyRiskOutputSchema},
-  prompt: `You are an expert in Indian contract law.
-
-  Review the following legal document and identify the single most critical or unfavorable clause for a user.
-  Determine if the document contains any risk.
-  If a risk is found, classify its severity as 'high', 'medium', or 'low'.
-  Provide a short title for the risk (e.g., "Termination Clause", "Liability Cap").
-  Provide a concise, one-sentence explanation of why it is a risk.
-  If no significant risks are found, set hasRisk to false and riskLevel to 'none'.
-
-  Document Text:
-  {{{documentText}}}
-  `,
+  prompt: ``,
 });
 
 const findKeyRiskFlow = ai.defineFlow(

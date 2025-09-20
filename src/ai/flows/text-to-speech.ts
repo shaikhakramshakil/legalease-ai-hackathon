@@ -74,7 +74,7 @@ const textToSpeechFlow = ai.defineFlow(
           },
         },
       },
-      prompt: input.text,
+      prompt: '',
     });
 
     if (!media) {

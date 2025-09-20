@@ -29,13 +29,7 @@ const summarizeLegalDocumentPrompt = ai.definePrompt({
   name: 'summarizeLegalDocumentPrompt',
   input: {schema: SummarizeLegalDocumentInputSchema},
   output: {schema: SummarizeLegalDocumentOutputSchema},
-  prompt: `You are an expert legal summarizer. You are an expert in Indian law.
-
-  Summarize the following legal document, highlighting key clauses related to payment dates, penalties, renewals, and liabilities. 
-  Be as concise as possible, writing in simple, easy-to-understand language.
-
-  Document:
-  {{{documentText}}}`,
+  prompt: ``,
 });
 
 const summarizeLegalDocumentFlow = ai.defineFlow(

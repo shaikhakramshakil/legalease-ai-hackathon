@@ -35,7 +35,7 @@ const prompt = ai.definePrompt({
   name: 'translateLegalSummaryPrompt',
   input: {schema: TranslateLegalSummaryInputSchema},
   output: {schema: TranslateLegalSummaryOutputSchema},
-  prompt: `Translate the following legal summary from English to Hindi:\n\n{{englishSummary}}`,
+  prompt: ``,
 });
 
 const translateLegalSummaryFlow = ai.defineFlow(

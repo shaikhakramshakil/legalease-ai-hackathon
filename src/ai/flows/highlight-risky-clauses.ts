@@ -31,26 +31,7 @@ const prompt = ai.definePrompt({
   name: 'highlightRiskyClausesPrompt',
   input: {schema: HighlightRiskyClausesInputSchema},
   output: {schema: HighlightRiskyClausesOutputSchema},
-  prompt: `You are an expert in Indian contract law.
-
-  You will receive the text of a legal document. Your task is to identify and highlight potentially risky or unusual clauses based on Indian contract norms.
-
-  Highlight the risky clauses by wrapping them with HTML-like tags that specify a color. For example:
-
-  <high>This is a risky clause</high>
-  <medium>This clause requires further review</medium>
-  <low>This is a low-risk clause</low>
-
-  The colors should indicate the severity of the risk:
-  - high: High risk - clauses that are likely to be unenforceable or very unfavorable to the user.
-  - medium: Medium risk - clauses that require further review or clarification.
-  - low: Low risk - clauses that are unusual but not necessarily unfavorable.
-
-  Do not add any explanations or commentary. Only highlight the clauses. Return the entire document with the highlighted clauses.
-
-  Document Text:
-  {{{documentText}}}
-  `,
+  prompt: ``,
 });
 
 const highlightRiskyClausesFlow = ai.defineFlow(
