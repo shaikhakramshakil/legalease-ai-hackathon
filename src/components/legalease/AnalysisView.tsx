@@ -4,10 +4,12 @@ import { useState, useMemo, Fragment, type ReactNode, useEffect, useRef } from "
 import { Button } from "@/components/ui/button";
 import { translateSummaryAction } from "@/app/actions";
 import { Loader2 } from "lucide-react";
+import type { KeyRisk } from "./RiskAlertView";
 
 export type AnalysisResult = {
   summary: string;
   highlightedText: string;
+  keyRisk: KeyRisk;
 };
 
 type AnalysisViewProps = {

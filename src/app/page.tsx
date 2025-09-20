@@ -23,8 +23,8 @@ import { FileUpload } from "@/components/legalease/FileUpload";
 import { LoadingState } from "@/components/legalease/LoadingState";
 import {
   AnalysisView,
-  type AnalysisResult,
 } from "@/components/legalease/AnalysisView";
+import { RiskAlertView, type KeyRisk } from "@/components/legalease/RiskAlertView";
 import { analyzeDocumentAction } from "./actions";
 import { sampleLegalText } from "@/lib/legal-text";
 import { useToast } from "@/hooks/use-toast";
@@ -38,7 +38,13 @@ import {
 } from "@/components/ui/sheet";
 import { Chatbot } from "@/components/legalease/Chatbot";
 
-type AppState = "initial" | "loading" | "error" | "result";
+type AppState = "initial" | "loading" | "error" | "result" | "risk-alert";
+type AnalysisResult = {
+  summary: string;
+  highlightedText: string;
+  keyRisk: KeyRisk;
+};
+
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>("initial");
@@ -55,7 +61,11 @@ export default function Home() {
       setDocumentText(text);
       const result = await analyzeDocumentAction(text);
       setAnalysisResult(result);
-      setAppState("result");
+      if (result.keyRisk.hasRisk && (result.keyRisk.riskLevel === 'high' || result.keyRisk.riskLevel === 'medium')) {
+        setAppState("risk-alert");
+      } else {
+        setAppState("result");
+      }
     } catch (error) {
       console.error(error);
       setAppState("error");
@@ -75,7 +85,11 @@ export default function Home() {
       setDocumentText(sampleLegalText);
       const result = await analyzeDocumentAction(sampleLegalText);
       setAnalysisResult(result);
-      setAppState("result");
+       if (result.keyRisk.hasRisk && (result.keyRisk.riskLevel === 'high' || result.keyRisk.riskLevel === 'medium')) {
+        setAppState("risk-alert");
+      } else {
+        setAppState("result");
+      }
     } catch (error) {
       console.error(error);
       setAppState("error");
@@ -87,6 +101,10 @@ export default function Home() {
       });
       handleReset();
     }
+  };
+  
+  const proceedToResults = () => {
+    setAppState("result");
   };
 
   const handleReset = () => {
@@ -168,6 +186,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen justify-between bg-background text-foreground">
+     {appState !== 'risk-alert' && (
       <header className="flex items-center justify-between p-4 border-b">
         <Button variant="ghost" size="icon">
           <Menu />
@@ -177,53 +196,65 @@ export default function Home() {
           <Bell />
         </Button>
       </header>
+      )}
 
       <main className="flex-1 flex flex-col p-6 overflow-y-auto">
         {appState === "initial" && renderInitialState()}
         {appState === "loading" && <LoadingState />}
+        {appState === "risk-alert" && analysisResult && (
+          <RiskAlertView 
+            keyRisk={analysisResult.keyRisk}
+            onLearnMore={proceedToResults}
+            onOk={proceedToResults}
+          />
+        )}
         {appState === "result" && analysisResult && (
           <AnalysisView result={analysisResult} onReset={handleReset} />
         )}
       </main>
 
-      <div className="fixed bottom-24 right-6">
-         <Sheet>
-           <SheetTrigger asChild>
-             <Button className="bg-primary dark:bg-white text-white dark:text-black rounded-full p-4 shadow-lg hover:bg-black/80 dark:hover:bg-gray-200 transition-transform transform hover:scale-105">
-                <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48"}}>forum</span>
-             </Button>
-           </SheetTrigger>
-           <SheetContent side="bottom" className="h-screen w-screen flex flex-col p-0 border-0" hideClose={true}>
-             <Chatbot documentText={documentText} />
-           </SheetContent>
-         </Sheet>
-       </div>
+       {appState !== 'risk-alert' && (
+        <>
+          <div className="fixed bottom-24 right-6">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button className="bg-primary dark:bg-white text-white dark:text-black rounded-full p-4 shadow-lg hover:bg-black/80 dark:hover:bg-gray-200 transition-transform transform hover:scale-105">
+                    <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48"}}>forum</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="bottom" className="h-screen w-screen flex flex-col p-0 border-0" hideClose={true}>
+                <Chatbot documentText={documentText} />
+              </SheetContent>
+            </Sheet>
+          </div>
 
-      <footer className="bg-background border-t sticky bottom-0">
-        <nav className="flex justify-around p-2">
-          <a
-            className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary bg-primary/10"
-            href="#"
-          >
-            <span className="material-symbols-outlined">upload</span>
-            <span className="text-xs font-medium">Upload</span>
-          </a>
-          <a
-            className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
-            href="#"
-          >
-            <span className="material-symbols-outlined">description</span>
-            <span className="text-xs font-medium">Summaries</span>
-          </a>
-          <a
-            className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
-            href="/profile"
-          >
-            <span className="material-symbols-outlined">person</span>
-            <span className="text-xs font-medium">Account</span>
-          </a>
-        </nav>
-      </footer>
+          <footer className="bg-background border-t sticky bottom-0">
+            <nav className="flex justify-around p-2">
+              <a
+                className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary bg-primary/10"
+                href="#"
+              >
+                <span className="material-symbols-outlined">upload</span>
+                <span className="text-xs font-medium">Upload</span>
+              </a>
+              <a
+                className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
+                href="#"
+              >
+                <span className="material-symbols-outlined">description</span>
+                <span className="text-xs font-medium">Summaries</span>
+              </a>
+              <a
+                className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
+                href="/profile"
+              >
+                <span className="material-symbols-outlined">person</span>
+                <span className="text-xs font-medium">Account</span>
+              </a>
+            </nav>
+          </footer>
+        </>
+       )}
     </div>
   );
 }

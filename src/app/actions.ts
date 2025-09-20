@@ -4,11 +4,18 @@ import { summarizeLegalDocument } from '@/ai/flows/summarize-legal-document';
 import { highlightRiskyClauses } from '@/ai/flows/highlight-risky-clauses';
 import { translateLegalSummary } from '@/ai/flows/translate-legal-summary';
 import { chatWithDocument } from '@/ai/flows/chat-with-document';
+import { findKeyRisk } from '@/ai/flows/find-key-risk';
 import { z } from 'zod';
 
 const AnalyzeDocumentResponseSchema = z.object({
   summary: z.string(),
   highlightedText: z.string(),
+  keyRisk: z.object({
+    hasRisk: z.boolean(),
+    riskLevel: z.enum(['high', 'medium', 'low', 'none']),
+    riskTitle: z.string().optional(),
+    riskExplanation: z.string().optional(),
+  }),
 });
 
 export async function analyzeDocumentAction(documentText: string) {
@@ -17,14 +24,16 @@ export async function analyzeDocumentAction(documentText: string) {
   }
 
   try {
-    const [summaryResult, riskResult] = await Promise.all([
+    const [summaryResult, riskResult, keyRiskResult] = await Promise.all([
         summarizeLegalDocument({ documentText }),
         highlightRiskyClauses({ documentText }),
+        findKeyRisk({ documentText }),
     ]);
 
     const validatedResult = AnalyzeDocumentResponseSchema.safeParse({
       summary: summaryResult.summary,
       highlightedText: riskResult.highlightedText,
+      keyRisk: keyRiskResult,
     });
 
     if (!validatedResult.success) {
