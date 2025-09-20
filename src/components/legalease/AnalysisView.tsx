@@ -6,6 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import type { KeyRisk } from "./RiskAlertView";
 import Link from 'next/link';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useToast } from "@/hooks/use-toast";
+
 
 export type AnalysisResult = {
   summary: string;
@@ -73,6 +81,37 @@ const parseHighlightedText = (text: string): Clause[] => {
 
 export function AnalysisView({ result, onReset }: AnalysisViewProps) {
   const detailsRefs = useRef<(HTMLDetailsElement | null)[]>([]);
+  const { toast } = useToast();
+  const [isShareSupported, setIsShareSupported] = useState(false);
+
+  useEffect(() => {
+    if (navigator.share) {
+      setIsShareSupported(true);
+    }
+  }, []);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Legal Document Analysis Report',
+          text: 'Here is the summary of the legal document I analyzed with Legalease AI.',
+          url: window.location.href,
+        });
+      } catch (error) {
+        console.error('Error sharing:', error);
+        toast({
+            title: "Sharing Failed",
+            description: "Could not share the report at this moment.",
+            variant: "destructive"
+        })
+      }
+    }
+  };
+
+  const handleDownload = () => {
+    window.print();
+  };
 
   const clauses = useMemo(() => parseHighlightedText(result.highlightedText), [result.highlightedText]);
   const riskyClausesCount = clauses.filter(c => c.type === 'risk').length;
@@ -115,7 +154,26 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
             <span className="material-symbols-outlined"> arrow_back_ios_new </span>
           </button>
           <h1 className="text-lg font-bold text-foreground">Summary</h1>
-          <div className="w-6"></div>
+          <div className="flex items-center gap-2">
+            {isShareSupported && (
+                 <button onClick={handleShare} className="p-2 -m-2 text-muted-foreground">
+                    <span className="material-symbols-outlined"> share </span>
+                </button>
+            )}
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <button className="p-2 -m-2 text-muted-foreground">
+                        <span className="material-symbols-outlined"> more_vert </span>
+                    </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={handleDownload}>
+                         <span className="material-symbols-outlined mr-2"> download </span>
+                        <span>Download as PDF</span>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </header>
 
