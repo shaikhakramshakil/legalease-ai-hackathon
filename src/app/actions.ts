@@ -3,7 +3,6 @@
 
 import { summarizeLegalDocument } from '@/ai/flows/summarize-legal-document';
 import { highlightRiskyClauses } from '@/ai/flows/highlight-risky-clauses';
-import { translateLegalSummary } from '@/ai/flows/translate-legal-summary';
 import { chatWithDocument } from '@/ai/flows/chat-with-document';
 import { findKeyRisk } from '@/ai/flows/find-key-risk';
 import { textToSpeech } from '@/ai/flows/text-to-speech';
@@ -50,21 +49,6 @@ export async function analyzeDocumentAction(documentText: string) {
   }
 }
 
-
-export async function translateSummaryAction(englishSummary: string) {
-    if (!englishSummary) {
-        throw new Error('English summary cannot be empty.');
-    }
-
-    try {
-        const translationResult = await translateLegalSummary({ englishSummary });
-        return translationResult.hindiSummary;
-    } catch(error) {
-        console.error("Error in translateSummaryAction:", error);
-        throw new Error("Failed to translate summary due to a server error.");
-    }
-}
-
 export async function chatAction(documentText: string, query: string) {
   if (!documentText) {
     throw new Error("Document text cannot be empty.");
@@ -82,13 +66,13 @@ export async function chatAction(documentText: string, query: string) {
   }
 }
 
-export async function textToSpeechAction(text: string, language: 'en-US' | 'hi-IN') {
+export async function textToSpeechAction(text: string) {
     if (!text) {
         throw new Error('Text for speech cannot be empty.');
     }
 
     try {
-        const result = await textToSpeech({ text, language });
+        const result = await textToSpeech({ text });
         return result.audioDataUri;
     } catch(error) {
         console.error("Error in textToSpeechAction:", error);

@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -15,7 +16,6 @@ import wav from 'wav';
 
 const TextToSpeechInputSchema = z.object({
   text: z.string().describe('The text to be converted to speech.'),
-  language: z.enum(['en-US', 'hi-IN']).describe('The language of the text.'),
 });
 export type TextToSpeechInput = z.infer<typeof TextToSpeechInputSchema>;
 
@@ -70,9 +70,8 @@ const textToSpeechFlow = ai.defineFlow(
         responseModalities: ['AUDIO'],
         speechConfig: {
           voiceConfig: {
-            prebuiltVoiceConfig: { voiceName: input.language === 'hi-IN' ? 'Abhilasha' : 'Algenib' },
+            prebuiltVoiceConfig: { voiceName: 'Algenib' },
           },
-          languageCode: input.language,
         },
       },
       prompt: input.text,

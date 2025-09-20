@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 import { textToSpeechAction } from "@/app/actions";
-import { translateSummaryAction } from "@/app/actions";
 
 
 export type AnalysisResult = {
@@ -86,10 +85,6 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
   const { toast } = useToast();
   const [isShareSupported, setIsShareSupported] = useState(false);
   
-  const [currentLanguage, setCurrentLanguage] = useState<'en-US' | 'hi-IN'>('en-US');
-  const [hindiSummary, setHindiSummary] = useState<string | null>(null);
-  const [isTranslating, setIsTranslating] = useState(false);
-
   const [isReading, setIsReading] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
@@ -166,17 +161,7 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
 
     setIsGeneratingAudio(true);
     try {
-      let textToRead = result.summary;
-      if (currentLanguage === 'hi-IN') {
-        if (!hindiSummary) {
-          toast({ title: "Translation needed", description: "Please wait for the Hindi translation to finish."});
-          setIsGeneratingAudio(false);
-          return;
-        }
-        textToRead = hindiSummary;
-      }
-      
-      const audioDataUri = await textToSpeechAction(textToRead, currentLanguage);
+      const audioDataUri = await textToSpeechAction(result.summary);
       playAudio(audioDataUri);
 
     } catch (error) {
@@ -191,32 +176,6 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
       setIsGeneratingAudio(false);
     }
   };
-  
-  const handleLanguageChange = async (lang: 'en-US' | 'hi-IN') => {
-    if (lang === currentLanguage) return;
-
-    if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-        setIsReading(false);
-    }
-
-    setCurrentLanguage(lang);
-    if (lang === 'hi-IN' && !hindiSummary) {
-        setIsTranslating(true);
-        try {
-            const translatedText = await translateSummaryAction(result.summary);
-            setHindiSummary(translatedText);
-        } catch(e) {
-            console.error(e);
-            toast({ title: "Translation Failed", description: "Could not translate the summary to Hindi.", variant: "destructive" });
-            setCurrentLanguage('en-US');
-        } finally {
-            setIsTranslating(false);
-        }
-    }
-  }
-
 
   const clauses = useMemo(() => parseHighlightedText(result.highlightedText), [result.highlightedText]);
   const riskyClausesCount = clauses.filter(c => c.type === 'risk').length;
@@ -310,32 +269,13 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
         <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-foreground">Plain-Language Summary</h2>
              <div className="flex items-center gap-2">
-                <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isGeneratingAudio || isTranslating}>
+                <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isGeneratingAudio}>
                     {isGeneratingAudio ? <Loader2 className="animate-spin" size={24}/> :  <span className="material-symbols-outlined text-2xl"> {isReading ? 'pause_circle' : 'play_circle'} </span>}
                 </button>
-                <div className="flex items-center rounded-full bg-accent p-1">
-                     <Button
-                        variant={currentLanguage === 'en-US' ? 'default' : 'ghost'}
-                        size="sm"
-                        className="rounded-full"
-                        onClick={() => handleLanguageChange('en-US')}
-                    >
-                        English
-                    </Button>
-                    <Button
-                        variant={currentLanguage === 'hi-IN' ? 'default' : 'ghost'}
-                        size="sm"
-                        className="rounded-full"
-                        onClick={() => handleLanguageChange('hi-IN')}
-                        disabled={isTranslating}
-                    >
-                        {isTranslating ? <Loader2 className="animate-spin" size={16}/> : 'हिन्दी'}
-                    </Button>
-                </div>
             </div>
         </div>
          <div className="text-muted-foreground leading-relaxed mb-8">
-            <p>{currentLanguage === 'hi-IN' && hindiSummary ? hindiSummary : result.summary}</p>
+            <p>{result.summary}</p>
         </div>
 
 
