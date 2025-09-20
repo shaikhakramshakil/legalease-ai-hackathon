@@ -29,15 +29,17 @@ export function AppFooter() {
               )}
             >
               {isActive && (
-                <div className="absolute -top-1 w-16 h-8 bg-primary/20 rounded-full blur-lg" />
+                <div className="absolute top-0 w-16 h-12 bg-primary/20 rounded-full blur-md" />
               )}
-              <span
-                className="material-symbols-outlined"
-                style={{ fontVariationSettings: isActive ? "'FILL' 1" : "" }}
-              >
-                {item.icon}
-              </span>
-              <span className="text-xs font-medium">{item.label}</span>
+              <div className="relative z-10 flex flex-col items-center gap-1">
+                <span
+                  className="material-symbols-outlined"
+                  style={{ fontVariationSettings: isActive ? "'FILL' 1" : "" }}
+                >
+                  {item.icon}
+                </span>
+                <span className="text-xs font-medium">{item.label}</span>
+              </div>
             </Link>
           );
         })}
