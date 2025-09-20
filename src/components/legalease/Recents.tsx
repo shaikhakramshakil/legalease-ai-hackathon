@@ -10,9 +10,9 @@ export function Recents() {
             </a>
             </div>
             <div className="space-y-4">
-            <div className="flex items-center justify-between rounded-lg bg-muted/50 p-4">
+            <div className="flex items-center justify-between rounded-lg bg-black/10 backdrop-blur-lg border border-white/10 p-4">
                 <div className="flex items-center gap-4">
-                <div className="rounded-lg bg-muted p-3">
+                <div className="rounded-lg bg-black/20 p-3">
                     <FileText className="h-6 w-6" />
                 </div>
                 <div>
@@ -24,9 +24,9 @@ export function Recents() {
                 </div>
                 <ChevronRight className="text-muted-foreground" />
             </div>
-            <div className="flex items-center justify-between rounded-lg bg-muted/50 p-4">
+            <div className="flex items-center justify-between rounded-lg bg-black/10 backdrop-blur-lg border border-white/10 p-4">
                 <div className="flex items-center gap-4">
-                <div className="rounded-lg bg-muted p-3">
+                <div className="rounded-lg bg-black/20 p-3">
                     <Gavel className="h-6 w-6" />
                 </div>
                 <div>
@@ -40,9 +40,9 @@ export function Recents() {
                 </div>
                 <ChevronRight className="text-muted-foreground" />
             </div>
-            <div className="flex items-center justify-between rounded-lg bg-muted/50 p-4">
+            <div className="flex items-center justify-between rounded-lg bg-black/10 backdrop-blur-lg border border-white/10 p-4">
                 <div className="flex items-center gap-4">
-                <div className="rounded-lg bg-muted p-3">
+                <div className="rounded-lg bg-black/20 p-3">
                     <ShieldCheck className="h-6 w-6" />
                 </div>
                 <div>
