@@ -60,7 +60,7 @@ export function AppFooter({ onFileSelect }: AppFooterProps) {
                     href={item.href}
                     className={cn(
                         "flex flex-col items-center justify-center gap-1 h-16 w-20 rounded-full text-muted-foreground transition-all duration-300 relative",
-                        !isActive && "hover:text-primary"
+                        isActive && "transform scale-110 -translate-y-1"
                     )}
                     >
                     {isActive && (
@@ -91,7 +91,7 @@ export function AppFooter({ onFileSelect }: AppFooterProps) {
                     href={item.href}
                     className={cn(
                         "flex flex-col items-center justify-center gap-1 h-16 w-20 rounded-full text-muted-foreground transition-all duration-300 relative",
-                        !isActive && "hover:text-primary"
+                         isActive && "transform scale-110 -translate-y-1"
                     )}
                     >
                     {isActive && (
