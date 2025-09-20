@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className="font-body antialiased relative">
         <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-black" />
-            <div className="absolute top-0 left-0 right-0 h-1/2 bg-[radial-gradient(circle_500px_at_50%_0%,rgba(255,255,255,0.1),transparent)]" />
+            <div className="absolute top-0 left-0 right-0 h-1/2 bg-[radial-gradient(circle_500px_at_50%_0%,rgba(255,255,255,0.2),transparent)]" />
         </div>
         <div className="relative z-10">
           {children}
