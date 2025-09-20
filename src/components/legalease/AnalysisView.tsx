@@ -123,7 +123,7 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
 
 
   return (
-    <div className="min-h-screen flex flex-col animate-in fade-in duration-500">
+    <div className="flex flex-col h-full animate-in fade-in duration-500">
       <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b">
         <div className="flex items-center justify-between p-4">
           <button onClick={onReset} className="p-2 -m-2 text-muted-foreground">
@@ -134,7 +134,7 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
         </div>
       </header>
 
-      <main className="flex-1 px-5 pt-4 pb-4 overflow-y-auto">
+      <main className="flex-1 px-5 pt-6 pb-24 overflow-y-auto">
         <div className="mb-8 p-6 rounded-xl bg-card">
           <h2 className="text-sm font-semibold uppercase text-muted-foreground tracking-wider mb-4">Overall Risk Level</h2>
           <div className="mb-6">
@@ -206,14 +206,11 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
             </details>
           ))}
         </div>
-      </main>
-
-      <footer className="sticky bottom-0 bg-background/90 backdrop-blur-sm p-4 border-t">
-        <Button onClick={onReset} className="w-full h-14 text-base">
+        <Button onClick={onReset} className="w-full h-14 text-base mt-8">
           <span className="material-symbols-outlined"> document_scanner </span>
           <span>Analyze Another Document</span>
         </Button>
-      </footer>
+      </main>
     </div>
   );
 }

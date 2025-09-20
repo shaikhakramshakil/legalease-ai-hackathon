@@ -212,7 +212,7 @@ export default function Home() {
       </header>
       )}
 
-      <main className="flex-1 flex flex-col p-6 overflow-y-auto">
+      <main className={`flex-1 flex flex-col overflow-y-auto ${appState === 'initial' ? 'p-6': ''}`}>
         {appState === "initial" && renderInitialState()}
         {appState === "loading" && <LoadingState />}
         {appState === "risk-alert" && analysisResult && (
@@ -227,7 +227,7 @@ export default function Home() {
         )}
       </main>
 
-       {appState !== 'risk-alert' && (
+       {(appState === 'initial' || appState === 'result') && (
         <>
           <div className="fixed bottom-24 right-6">
             <Sheet>
