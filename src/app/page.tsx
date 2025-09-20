@@ -34,6 +34,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose
 } from "@/components/ui/sheet";
 import { Chatbot } from "@/components/legalease/Chatbot";
 
@@ -96,25 +97,12 @@ export default function Home() {
 
   const renderInitialState = () => (
     <div className="w-full max-w-md mx-auto">
-      <div className="relative flex flex-col items-center justify-center p-8 border-2 border-dashed border-black/50 dark:border-white/50 rounded-2xl bg-black/5 dark:bg-white/5 mb-8">
-        <span className="material-symbols-outlined text-6xl text-primary dark:text-white mb-4">
-          upload_file
-        </span>
-        <h2 className="text-xl font-bold mb-2">Upload Your Document</h2>
-        <p className="text-sm text-center text-black/60 dark:text-white/60 mb-6">
-          Let our AI clarify jargon, highlight risks, and provide
-          easy-to-understand explanations.
-        </p>
-        <FileUpload
-          onAnalyze={handleAnalyze}
-          onUseSample={handleUseSample}
-        />
-        <p className="text-xs text-black/50 dark:text-white/50 mt-4">
-          PDF, DOCX, TXT accepted
-        </p>
-      </div>
+      <FileUpload
+        onAnalyze={handleAnalyze}
+        onUseSample={handleUseSample}
+      />
 
-      <div className="mb-8">
+      <div className="my-8">
         <h3 className="text-lg font-semibold mb-3">Or start with a template</h3>
         <div className="grid grid-cols-3 gap-4 text-center">
           <button onClick={handleUseSample} className="flex flex-col items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl hover:bg-black/10 dark:hover:bg-white/20 transition-colors">

@@ -35,10 +35,9 @@ export function FileUpload({ onAnalyze, onUseSample }: FileUploadProps) {
   };
 
   return (
-    <>
-      <h2 className="text-white text-3xl font-bold text-center mb-10">Drag & drop your files</h2>
+    <div className="mb-8">
       <div 
-        className="flex flex-col items-center gap-6 rounded-3xl border border-white/20 bg-white/10 px-6 py-20 shadow-lg backdrop-blur-sm"
+        className="relative flex flex-col items-center justify-center p-8 border-2 border-dashed border-black/50 dark:border-white/50 rounded-2xl bg-black/5 dark:bg-white/5"
         onDragEnter={(e) => {e.preventDefault(); e.stopPropagation();}}
         onDragLeave={(e) => {e.preventDefault(); e.stopPropagation();}}
         onDragOver={(e) => {e.preventDefault(); e.stopPropagation();}}
@@ -51,28 +50,29 @@ export function FileUpload({ onAnalyze, onUseSample }: FileUploadProps) {
             accept={acceptedFileTypes}
             onChange={(e) => handleFileChange(e.target.files?.[0] || null)}
         />
-        <div className="flex flex-col items-center gap-4 text-center">
-          <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center">
-              <UploadCloud className="text-white h-10 w-10" />
-          </div>
-          <p className="text-white text-lg font-semibold">Drop files here</p>
-          <p className="text-gray-300 text-sm">or select from your device</p>
-        </div>
-        <button 
-            onClick={handleButtonClick}
-            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-white text-black text-base font-bold shadow-md transition-all hover:bg-gray-100"
-        >
-            <span className="truncate">Upload Document</span>
-        </button>
+        <span className="material-symbols-outlined text-6xl text-primary dark:text-white mb-4">
+          upload_file
+        </span>
+        <h2 className="text-xl font-bold mb-2">Upload Your Document</h2>
+        <p className="text-sm text-center text-black/60 dark:text-white/60 mb-6">
+          Let our AI clarify jargon, highlight risks, and provide
+          easy-to-understand explanations.
+        </p>
+        <Button onClick={handleButtonClick} className="w-full">
+            Select file to upload
+        </Button>
+        <p className="text-xs text-black/50 dark:text-white/50 mt-4">
+          PDF, DOCX, TXT accepted
+        </p>
       </div>
       <div className="mt-8 flex flex-col items-center gap-2">
-            <p className="text-sm text-gray-300">
-            Don't have a document?
+        <p className="text-sm text-gray-300">
+          Don't have a document?
         </p>
         <Button variant="link" className="text-white" onClick={onUseSample}>
             Try with a Sample Document
         </Button>
       </div>
-    </>
+    </div>
   );
 }
