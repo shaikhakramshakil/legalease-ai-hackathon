@@ -1,68 +1,152 @@
 "use client";
 
 import Link from "next/link";
-import { Home, History, User, Settings, LogOut, FileText } from "lucide-react";
+import {
+    Home,
+    History,
+    Settings,
+    LogOut,
+    FileText,
+    Gavel,
+    School,
+    MenuBook,
+    Share,
+    HelpCircle,
+    PlusCircle
+} from "lucide-react";
 import { Button } from "../ui/button";
+import Image from "next/image";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export function AppSidebar() {
+  const userAvatar = PlaceHolderImages.find(p => p.id === 'user-avatar');
+
   return (
-    <div className="flex flex-col h-full bg-background border-r">
-      <div className="flex items-center justify-between p-4 border-b">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-            <User className="w-6 h-6" />
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Welcome</p>
-            <h1 className="text-lg font-bold">Alex</h1>
-          </div>
+    <div className="flex flex-col h-full bg-background text-foreground p-4 shadow-2xl">
+      <div className="p-4 pb-2 flex items-center gap-4">
+        {userAvatar && (
+            <Image
+                alt="User Avatar"
+                className="h-12 w-12 rounded-full"
+                src={userAvatar.imageUrl}
+                width={48}
+                height={48}
+                data-ai-hint={userAvatar.imageHint}
+            />
+        )}
+        <div>
+          <h1 className="text-xl font-bold text-foreground">Alex Doe</h1>
+          <Link href="/profile" className="text-sm text-primary">
+            View Profile
+          </Link>
         </div>
       </div>
-      <nav className="flex-1 p-4 space-y-2">
-        <Link href="/" passHref>
-          <Button variant="ghost" className="w-full justify-start gap-3">
-            <Home className="w-5 h-5" />
-            <span>Home</span>
-          </Button>
-        </Link>
-        <Link href="#" passHref>
-           <Button variant="ghost" className="w-full justify-start gap-3">
-            <History className="w-5 h-5" />
-            <span>History</span>
-          </Button>
-        </Link>
-        <Link href="/profile" passHref>
-           <Button variant="ghost" className="w-full justify-start gap-3">
-            <User className="w-5 h-5" />
-            <span>Profile</span>
-          </Button>
-        </Link>
-        <div className="px-3 pt-4 pb-2">
-            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Recent</h3>
-        </div>
-         <Link href="#" passHref>
-           <Button variant="ghost" className="w-full justify-start gap-3 font-normal text-muted-foreground">
-            <FileText className="w-5 h-5" />
-            <span className="truncate">Rental_Agreement_Final.pdf</span>
-          </Button>
-        </Link>
-         <Link href="#" passHref>
-           <Button variant="ghost" className="w-full justify-start gap-3 font-normal text-muted-foreground">
-            <FileText className="w-5 h-5" />
-            <span className="truncate">Freelance_Gig_Terms.txt</span>
-          </Button>
-        </Link>
+      <nav className="flex flex-1 flex-col justify-between pt-4">
+        <ul className="flex flex-col space-y-1">
+          <li>
+            <Link
+              className="flex items-center gap-4 rounded-lg bg-primary/10 dark:bg-primary/20 px-4 py-3 text-primary"
+              href="/"
+            >
+              <span className="material-symbols-outlined text-primary">home</span>
+              <span className="font-bold text-sm">Home/Dashboard</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              href="#"
+            >
+              <span className="material-symbols-outlined">add_circle</span>
+              <span className="font-medium text-sm">Upload New Document</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              href="#"
+            >
+              <span className="material-symbols-outlined">history</span>
+              <span className="font-medium text-sm">Past Summaries</span>
+            </Link>
+          </li>
+          <li className="pt-4">
+            <h2 className="px-4 text-xs font-bold uppercase text-muted-foreground">
+              Legal Resources
+            </h2>
+          </li>
+          <li>
+            <Link
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              href="#"
+            >
+              <span className="material-symbols-outlined">gavel</span>
+              <span className="font-medium text-sm">Find Legal Aid</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              href="#"
+            >
+              <span className="material-symbols-outlined">school</span>
+              <span className="font-medium text-sm">Educational Content</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              href="#"
+            >
+              <span className="material-symbols-outlined">menu_book</span>
+              <span className="font-medium text-sm">Legal Dictionary</span>
+            </Link>
+          </li>
+          <li className="pt-4">
+            <h2 className="px-4 text-xs font-bold uppercase text-muted-foreground">
+              App
+            </h2>
+          </li>
+          <li>
+            <Link
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              href="#"
+            >
+              <span className="material-symbols-outlined">share</span>
+              <span className="font-medium text-sm">Share & Invite</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              href="/settings"
+            >
+              <span className="material-symbols-outlined">settings</span>
+              <span className="font-medium text-sm">Settings</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              href="#"
+            >
+              <span className="material-symbols-outlined">help</span>
+              <span className="font-medium text-sm">Help & Support</span>
+            </Link>
+          </li>
+        </ul>
+        <ul className="border-t border-border pt-2">
+          <li>
+            <a
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              href="#"
+            >
+              <span className="material-symbols-outlined">logout</span>
+              <span className="font-medium text-sm">Log Out</span>
+            </a>
+          </li>
+        </ul>
       </nav>
-      <div className="p-4 border-t mt-auto">
-         <Button variant="ghost" className="w-full justify-start gap-3">
-            <Settings className="w-5 h-5" />
-            <span>Settings</span>
-          </Button>
-        <Button variant="ghost" className="w-full justify-start gap-3 text-red-500 hover:text-red-500 hover:bg-red-500/10">
-          <LogOut className="w-5 h-5" />
-          <span>Logout</span>
-        </Button>
-      </div>
     </div>
   );
 }
