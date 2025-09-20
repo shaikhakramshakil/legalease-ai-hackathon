@@ -5,13 +5,14 @@ import { useToast } from "@/hooks/use-toast";
 import {
   Menu,
   Bell,
-  Upload,
+  UploadCloud,
   Gavel,
-  Home as HomeIcon,
+  HomeIcon,
   Briefcase,
   MoreVertical,
   CheckCircle,
   XCircle,
+  Upload,
   FileText,
   User,
 } from "lucide-react";
@@ -33,7 +34,7 @@ export default function Home() {
         <Button variant="ghost" size="icon">
           <Menu />
         </Button>
-        <h1 className="text-xl font-bold">Simplify Document</h1>
+        <h1 className="text-xl font-bold">LegalEase AI</h1>
         <Button variant="ghost" size="icon">
           <Bell />
         </Button>
@@ -43,7 +44,7 @@ export default function Home() {
         <div className="w-full max-w-md mx-auto">
           {/* Upload Section */}
           <div className="relative flex flex-col items-center justify-center p-8 border-2 border-dashed border-foreground/50 rounded-2xl bg-foreground/5 mb-8">
-            <Upload className="w-16 h-16 text-primary mb-4" />
+            <UploadCloud className="w-16 h-16 text-primary mb-4" />
             <h2 className="text-xl font-bold mb-2">Upload Your Document</h2>
             <p className="text-sm text-center text-foreground/60 mb-6">
               Let our AI clarify jargon, highlight risks, and provide
