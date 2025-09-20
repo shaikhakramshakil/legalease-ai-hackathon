@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 import { textToSpeechAction } from "@/app/actions";
+import { translateSummaryAction } from "@/app/actions";
 
 
 export type AnalysisResult = {
@@ -84,13 +85,27 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
   const detailsRefs = useRef<(HTMLDetailsElement | null)[]>([]);
   const { toast } = useToast();
   const [isShareSupported, setIsShareSupported] = useState(false);
+  
+  const [currentLanguage, setCurrentLanguage] = useState<'en-US' | 'hi-IN'>('en-US');
+  const [hindiSummary, setHindiSummary] = useState<string | null>(null);
+  const [isTranslating, setIsTranslating] = useState(false);
+
   const [isReading, setIsReading] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
 
   useEffect(() => {
     if (navigator.share) {
       setIsShareSupported(true);
     }
+
+    // Cleanup audio on component unmount
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
   }, []);
 
   const handleShare = async () => {
@@ -116,21 +131,54 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
     window.print();
   };
   
-  const handleReadAloud = async () => {
-    if (isReading) {
-      audioRef.current?.pause();
+  const playAudio = (audioDataUri: string) => {
+    const audio = new Audio(audioDataUri);
+    audioRef.current = audio;
+    audio.play();
+    setIsReading(true);
+    audio.onended = () => {
+      setIsReading(false);
       audioRef.current = null;
+    };
+     audio.onerror = () => {
+      console.error("Error playing audio.");
+      setIsReading(false);
+      toast({
+        title: "Playback Error",
+        description: "Could not play the generated audio.",
+        variant: "destructive",
+      });
+    };
+  }
+
+  const handleReadAloud = async () => {
+    if (isReading && audioRef.current) {
+      audioRef.current.pause();
       setIsReading(false);
       return;
     }
-    
-    setIsReading(true);
+
+    if (!isReading && audioRef.current) {
+      audioRef.current.play();
+      setIsReading(true);
+      return;
+    }
+
+    setIsGeneratingAudio(true);
     try {
-      const audioDataUri = await textToSpeechAction(result.summary, 'en-US');
-      const audio = new Audio(audioDataUri);
-      audioRef.current = audio;
-      audio.play();
-      audio.onended = () => setIsReading(false);
+      let textToRead = result.summary;
+      if (currentLanguage === 'hi-IN') {
+        if (!hindiSummary) {
+          toast({ title: "Translation needed", description: "Please wait for the Hindi translation to finish."});
+          setIsGeneratingAudio(false);
+          return;
+        }
+        textToRead = hindiSummary;
+      }
+      
+      const audioDataUri = await textToSpeechAction(textToRead, currentLanguage);
+      playAudio(audioDataUri);
+
     } catch (error) {
       console.error(error);
       toast({
@@ -138,9 +186,35 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
         description: "Could not generate audio for the summary.",
         variant: "destructive",
       });
-      setIsReading(false);
+    } finally {
+      setIsGeneratingAudio(false);
     }
   };
+  
+  const handleLanguageChange = async (lang: 'en-US' | 'hi-IN') => {
+    if (lang === currentLanguage) return;
+
+    if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+        setIsReading(false);
+    }
+
+    setCurrentLanguage(lang);
+    if (lang === 'hi-IN' && !hindiSummary) {
+        setIsTranslating(true);
+        try {
+            const translatedText = await translateSummaryAction(result.summary);
+            setHindiSummary(translatedText);
+        } catch(e) {
+            console.error(e);
+            toast({ title: "Translation Failed", description: "Could not translate the summary to Hindi.", variant: "destructive" });
+            setCurrentLanguage('en-US');
+        } finally {
+            setIsTranslating(false);
+        }
+    }
+  }
 
 
   const clauses = useMemo(() => parseHighlightedText(result.highlightedText), [result.highlightedText]);
@@ -234,22 +308,38 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
 
         <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-foreground">Plain-Language Summary</h2>
-            <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isReading}>
-                {isReading ? <Loader2 className="animate-spin" size={20}/> :  <span className="material-symbols-outlined"> volume_up </span>}
-            </button>
+             <div className="flex items-center gap-2">
+                <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isGeneratingAudio || isTranslating}>
+                    {isGeneratingAudio ? <Loader2 className="animate-spin" size={24}/> :  <span className="material-symbols-outlined text-2xl"> {isReading ? 'pause_circle' : 'play_circle'} </span>}
+                </button>
+            </div>
         </div>
-        <div className="text-muted-foreground leading-relaxed mb-8">
-            <p>{result.summary}</p>
+         <div className="text-muted-foreground leading-relaxed mb-8">
+            <p>{currentLanguage === 'hi-IN' && hindiSummary ? hindiSummary : result.summary}</p>
         </div>
 
 
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-foreground">Key Clauses</h2>
-          <Link href="/summary/hindi">
-            <button className="p-2 -m-2 text-primary">
-                <span className="material-symbols-outlined"> translate </span>
-            </button>
-          </Link>
+            <div className="flex items-center rounded-full bg-accent p-1">
+                 <Button
+                    variant={currentLanguage === 'en-US' ? 'default' : 'ghost'}
+                    size="sm"
+                    className="rounded-full"
+                    onClick={() => handleLanguageChange('en-US')}
+                >
+                    English
+                </Button>
+                <Button
+                    variant={currentLanguage === 'hi-IN' ? 'default' : 'ghost'}
+                    size="sm"
+                    className="rounded-full"
+                    onClick={() => handleLanguageChange('hi-IN')}
+                    disabled={isTranslating}
+                >
+                    {isTranslating ? <Loader2 className="animate-spin" size={16}/> : 'हिन्दी'}
+                </Button>
+            </div>
         </div>
 
         <div className="space-y-4">
@@ -286,3 +376,5 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
     </div>
   );
 }
+
+    
