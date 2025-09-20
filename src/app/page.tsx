@@ -184,7 +184,7 @@ export default function Home() {
          <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
             <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
-                    <Menu />
+                    <Menu className="h-6 w-6" />
                 </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-80 p-0">
@@ -196,7 +196,7 @@ export default function Home() {
           <DropdownMenuTrigger asChild>
             <div className="relative">
               <Button variant="ghost" size="icon">
-                <Bell />
+                <Bell className="h-6 w-6" />
               </Button>
               <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></div>
             </div>
@@ -272,6 +272,8 @@ export default function Home() {
     </div>
   );
 }
+
+    
 
     
 
