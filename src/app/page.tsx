@@ -209,25 +209,12 @@ export default function Home() {
           />
         )}
         {appState === "result" && analysisResult && (
-          <AnalysisView result={analysisResult} onReset={handleReset} />
+          <AnalysisView result={analysisResult} onReset={handleReset} documentText={documentText} />
         )}
       </main>
 
        {(appState === 'initial' || appState === 'result') && (
         <>
-          <div className="fixed bottom-24 right-6 z-20">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button className="glass-card rounded-full p-4 shadow-lg hover:bg-white/20 transition-transform transform hover:scale-105">
-                    <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48"}}>forum</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="bottom" className="h-screen w-screen flex flex-col p-0 border-0" hideClose={true}>
-                <Chatbot documentText={documentText} />
-              </SheetContent>
-            </Sheet>
-          </div>
-
           <AppFooter onFileSelect={handleAnalyze} />
         </>
        )}

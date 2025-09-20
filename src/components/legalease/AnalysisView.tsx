@@ -21,6 +21,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Chatbot } from "@/components/legalease/Chatbot";
 
 
 export type AnalysisResult = {
@@ -32,6 +38,7 @@ export type AnalysisResult = {
 type AnalysisViewProps = {
   result: AnalysisResult;
   onReset: () => void;
+  documentText: string;
 };
 
 const riskMapping: { [key: string]: { title: string, icon: string, color: string } } = {
@@ -87,7 +94,7 @@ const parseHighlightedText = (text: string): Clause[] => {
 };
 
 
-export function AnalysisView({ result, onReset }: AnalysisViewProps) {
+export function AnalysisView({ result, onReset, documentText }: AnalysisViewProps) {
   const detailsRefs = useRef<(HTMLDetailsElement | null)[]>([]);
   const { toast } = useToast();
   const [isShareSupported, setIsShareSupported] = useState(false);
@@ -354,10 +361,17 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
               </summary>
               <div className="clause-content px-4 pb-4">
                 <p className="text-muted-foreground text-sm leading-6 mb-4">{clause.content}</p>
-                <Link href="/clause" className="w-full h-10 px-4 bg-black/5 dark:bg-white/10 text-foreground font-bold text-sm rounded-lg flex items-center justify-center gap-2 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                  <span className="material-symbols-outlined text-base"> smart_toy </span>
-                  <span>Ask AI Assistant</span>
-                </Link>
+                 <Sheet>
+                    <SheetTrigger asChild>
+                        <Button className="w-full h-10 px-4 bg-black/5 dark:bg-white/10 text-foreground font-bold text-sm rounded-lg flex items-center justify-center gap-2 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+                            <span className="material-symbols-outlined text-base"> smart_toy </span>
+                            <span>Ask AI Assistant</span>
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="bottom" className="h-screen w-screen flex flex-col p-0 border-0" hideClose={true}>
+                        <Chatbot documentText={documentText} />
+                    </SheetContent>
+                </Sheet>
               </div>
             </details>
           ))}
