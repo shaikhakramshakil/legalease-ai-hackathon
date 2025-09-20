@@ -83,10 +83,7 @@ export default function SummariesPage() {
                 onChange={e => setSearchTerm(e.target.value)}
             />
         </div>
-      </header>
-
-      <main className="flex-1 overflow-y-auto">
-        <div className="sticky top-[137px] z-10 bg-background/80 backdrop-blur-sm px-4 pt-4">
+        <div className="mt-4">
              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                 <TabsList className="grid w-full grid-cols-4 bg-accent">
                     <TabsTrigger value="All">All</TabsTrigger>
@@ -96,7 +93,9 @@ export default function SummariesPage() {
                 </TabsList>
             </Tabs>
         </div>
-       
+      </header>
+
+      <main className="flex-1 overflow-y-auto">
         <div className="p-4 space-y-3">
           {filteredSummaries.map(summary => {
             const config = riskConfig[summary.risk as keyof typeof riskConfig];
@@ -108,6 +107,7 @@ export default function SummariesPage() {
                     </span>
                     <div className="flex-1">
                         <p className="font-medium text-foreground">{summary.title}</p>
+
                         <p className="text-xs text-muted-foreground">
                             Analyzed {summary.date}
                         </p>
@@ -148,5 +148,3 @@ export default function SummariesPage() {
     </div>
   );
 }
-
-    
