@@ -60,9 +60,9 @@ const summaries = [
 ];
 
 const riskConfig = {
-  low: { icon: BadgeCheck, label: 'Low Risk', color: 'text-green-500 bg-green-500/10' },
-  medium: { icon: CircleAlert, label: 'Medium Risk', color: 'text-yellow-500 bg-yellow-500/10' },
-  high: { icon: ShieldAlert, label: 'High Risk', color: 'text-red-500 bg-red-500/10' },
+  low: { icon: BadgeCheck, label: 'Low Risk', color: 'text-green-500 bg-green-500/10 border-green-500/20' },
+  medium: { icon: CircleAlert, label: 'Medium Risk', color: 'text-yellow-500 bg-yellow-500/10 border-yellow-500/20' },
+  high: { icon: ShieldAlert, label: 'High Risk', color: 'text-red-500 bg-red-500/10 border-red-500/20' },
 };
 
 type RiskLevel = 'low' | 'medium' | 'high';
@@ -288,17 +288,17 @@ export default function SummariesPage() {
             return (
               <Link href="/" key={summary.id} className="block">
                 <div className="glass-card p-4 rounded-xl flex flex-col gap-3 transition-colors hover:bg-white/20">
-                    <div className="flex justify-between items-start">
-                        <h3 className="font-bold text-base text-foreground pr-4">{summary.title}</h3>
-                        <span className={`flex items-center justify-center gap-1.5 text-sm font-medium w-28 py-1 rounded-full ${config.color}`}>
+                    <h3 className="font-bold text-base text-foreground pr-4">{summary.title}</h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2">{summary.description}</p>
+                    <div className="flex justify-between items-center text-xs text-muted-foreground pt-2 border-t border-white/10">
+                        <div className="flex items-center gap-4">
+                            <span>{summary.type}</span>
+                            <span>{formatDate(summary.date)}</span>
+                        </div>
+                        <span className={`flex items-center justify-center gap-1.5 text-xs font-medium px-2 py-1 rounded-full border ${config.color}`}>
                             <Icon className="h-3.5 w-3.5" />
                             <span>{config.label}</span>
                         </span>
-                    </div>
-                    <p className="text-sm text-muted-foreground line-clamp-2">{summary.description}</p>
-                    <div className="flex justify-between items-center text-xs text-muted-foreground">
-                        <span>{summary.type}</span>
-                        <span>{formatDate(summary.date)}</span>
                     </div>
                 </div>
               </Link>
