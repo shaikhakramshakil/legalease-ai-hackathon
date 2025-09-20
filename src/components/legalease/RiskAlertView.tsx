@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from "../ui/button";
@@ -49,7 +50,7 @@ export function RiskAlertView({ keyRisk, onLearnMore, onOk }: RiskAlertViewProps
                 <div className="flex flex-col space-y-4 pt-4 animate-in fade-in-0 duration-500 animation-delay-600">
                     <Button
                         onClick={onLearnMore}
-                        className="w-full h-14 px-6 bg-white text-primary text-lg font-bold rounded-xl transition-transform transform hover:scale-105 shadow-lg"
+                        className="w-full h-14 px-6 bg-white text-primary-foreground text-lg font-bold rounded-xl transition-transform transform hover:scale-105 shadow-lg"
                     >
                         Learn More
                     </Button>
@@ -65,3 +66,4 @@ export function RiskAlertView({ keyRisk, onLearnMore, onOk }: RiskAlertViewProps
         </div>
     );
 }
+
