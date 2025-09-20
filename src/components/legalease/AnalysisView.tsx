@@ -13,7 +13,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import { textToSpeechAction } from "@/app/actions";
+import { googleCloudTtsAction, translateSummaryAction } from "@/app/actions";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 
 export type AnalysisResult = {
@@ -89,8 +96,13 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
 
+  const [language, setLanguage] = useState<'en-US' | 'hi-IN'>('en-US');
+  const [hindiSummary, setHindiSummary] = useState<string | null>(null);
+  const [isTranslating, setIsTranslating] = useState(false);
+
+
   useEffect(() => {
-    if (navigator.share) {
+    if (typeof window.navigator.share !== "undefined") {
       setIsShareSupported(true);
     }
 
@@ -146,6 +158,28 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
     };
   }
 
+  const handleLanguageChange = async (lang: 'en-US' | 'hi-IN') => {
+    setLanguage(lang);
+    if (lang === 'hi-IN' && !hindiSummary) {
+      setIsTranslating(true);
+      try {
+        const translatedText = await translateSummaryAction(result.summary);
+        setHindiSummary(translatedText);
+      } catch (error) {
+        console.error("Translation error:", error);
+        toast({
+          title: "Translation Failed",
+          description: "Could not translate the summary to Hindi.",
+          variant: "destructive",
+        });
+        setLanguage('en-US'); // Revert to English on failure
+      } finally {
+        setIsTranslating(false);
+      }
+    }
+  };
+
+
   const handleReadAloud = async () => {
     if (isReading && audioRef.current) {
       audioRef.current.pause();
@@ -159,9 +193,19 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
       return;
     }
 
+    let textToRead = result.summary;
+    if (language === 'hi-IN') {
+      if (!hindiSummary) {
+        toast({ title: "Translation not ready", description: "Please wait for the translation to complete."});
+        return;
+      }
+      textToRead = hindiSummary;
+    }
+
+
     setIsGeneratingAudio(true);
     try {
-      const audioDataUri = await textToSpeechAction(result.summary);
+      const audioDataUri = await googleCloudTtsAction(textToRead, language);
       playAudio(audioDataUri);
 
     } catch (error) {
@@ -269,13 +313,22 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
         <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-foreground">Plain-Language Summary</h2>
              <div className="flex items-center gap-2">
-                <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isGeneratingAudio}>
-                    {isGeneratingAudio ? <Loader2 className="animate-spin" size={24}/> :  <span className="material-symbols-outlined text-2xl"> {isReading ? 'pause_circle' : 'play_circle'} </span>}
+                <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isGeneratingAudio || isTranslating}>
+                    {isGeneratingAudio || isTranslating ? <Loader2 className="animate-spin" size={24}/> :  <span className="material-symbols-outlined text-2xl"> {isReading ? 'pause_circle' : 'play_circle'} </span>}
                 </button>
+                 <Select value={language} onValueChange={(value) => handleLanguageChange(value as 'en-US' | 'hi-IN')}>
+                    <SelectTrigger className="w-[120px] bg-accent border-transparent">
+                        <SelectValue placeholder="Language" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="en-US">English</SelectItem>
+                        <SelectItem value="hi-IN">हिन्दी</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
         </div>
          <div className="text-muted-foreground leading-relaxed mb-8">
-            <p>{result.summary}</p>
+            <p>{language === 'hi-IN' ? (hindiSummary || 'Translating...' ): result.summary}</p>
         </div>
 
 

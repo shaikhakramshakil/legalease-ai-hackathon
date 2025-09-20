@@ -6,6 +6,8 @@ import { highlightRiskyClauses } from '@/ai/flows/highlight-risky-clauses';
 import { chatWithDocument } from '@/ai/flows/chat-with-document';
 import { findKeyRisk } from '@/ai/flows/find-key-risk';
 import { textToSpeech } from '@/ai/flows/text-to-speech';
+import { translateLegalSummary } from '@/ai/flows/translate-legal-summary';
+import { googleCloudTextToSpeech } from '@/ai/flows/google-cloud-tts';
 import { z } from 'zod';
 
 const AnalyzeDocumentResponseSchema = z.object({
@@ -79,4 +81,31 @@ export async function textToSpeechAction(text: string) {
         const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
         throw new Error(`Failed to generate audio due to a server error: ${errorMessage}`);
     }
+}
+
+export async function translateSummaryAction(englishSummary: string) {
+  if (!englishSummary) {
+    throw new Error('English summary cannot be empty.');
+  }
+  try {
+    const result = await translateLegalSummary({ englishSummary });
+    return result.hindiSummary;
+  } catch (error) {
+    console.error("Error in translateSummaryAction:", error);
+    throw new Error('Failed to translate summary.');
+  }
+}
+
+export async function googleCloudTtsAction(text: string, languageCode: 'en-US' | 'hi-IN') {
+  if (!text) {
+      throw new Error('Text for speech cannot be empty.');
+  }
+  try {
+      const result = await googleCloudTextToSpeech({ text, languageCode });
+      return result.audioDataUri;
+  } catch(error) {
+      console.error("Error in googleCloudTtsAction:", error);
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+      throw new Error(`Failed to generate audio using Google Cloud TTS: ${errorMessage}`);
+  }
 }
