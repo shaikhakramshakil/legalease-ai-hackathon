@@ -4,7 +4,14 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuCheckboxItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import Link from 'next/link';
 import { ArrowLeft, ChevronDown, CircleAlert, Search, Mic, FileText, BadgeCheck, ShieldAlert } from 'lucide-react';
 
@@ -12,23 +19,23 @@ const summaries = [
   {
     id: 1,
     title: 'Lease Agreement for 123 Elm Street',
-    date: 'June 15, 2024',
+    date: '2024-06-15',
     risk: 'medium',
-    type: 'Contract',
+    type: 'Lease',
     description: 'This lease agreement outlines the terms for renting the property at 123 Elm Street, including rent, duration, and responsibilities.'
   },
   {
     id: 2,
     title: 'Non-Disclosure Agreement (NDA)',
-    date: 'May 28, 2024',
+    date: '2024-05-28',
     risk: 'low',
-    type: 'Contract',
+    type: 'NDA',
     description: 'This NDA protects confidential information shared between parties, ensuring it remains private and not disclosed to third parties.'
   },
   {
     id: 3,
     title: 'Employment Contract for Sarah Chen',
-    date: 'April 10, 2024',
+    date: '2024-04-10',
     risk: 'high',
     type: 'Contract',
     description: 'This contract details the terms of employment for Sarah Chen, including her role, salary, benefits, and termination conditions.'
@@ -36,7 +43,7 @@ const summaries = [
   {
     id: 4,
     title: 'Software_Licensing_Agreement.txt',
-    date: '2 weeks ago',
+    date: '2024-07-01',
     risk: 'low',
     type: 'Contract',
     description: 'A standard software licensing agreement.'
@@ -44,7 +51,7 @@ const summaries = [
   {
     id: 5,
     title: 'Old_Lease_Agreement_2022.pdf',
-    date: '1 month ago',
+    date: '2022-01-15',
     risk: 'medium',
     type: 'Lease',
     description: 'An older lease agreement from 2022.'
@@ -57,19 +64,61 @@ const riskConfig = {
   high: { icon: ShieldAlert, label: 'High Risk', color: 'text-red-500 bg-red-500/10' },
 };
 
+type RiskLevel = 'low' | 'medium' | 'high';
+const ALL_RISK_LEVELS: RiskLevel[] = ['low', 'medium', 'high'];
+const ALL_DOC_TYPES = [...new Set(summaries.map(s => s.type))];
+
 type SortOption = "Newest" | "Oldest" | "Relevance";
 
 export default function SummariesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState<SortOption>("Newest");
+  const [selectedRiskLevels, setSelectedRiskLevels] = useState<RiskLevel[]>(ALL_RISK_LEVELS);
+  const [selectedDocTypes, setSelectedDocTypes] = useState<string[]>(ALL_DOC_TYPES);
 
-  // Filtering logic can be expanded later
+
+  const toggleRiskLevel = (riskLevel: RiskLevel) => {
+    setSelectedRiskLevels(prev => 
+      prev.includes(riskLevel) 
+        ? prev.filter(r => r !== riskLevel)
+        : [...prev, riskLevel]
+    );
+  };
+  
+  const toggleDocType = (docType: string) => {
+    setSelectedDocTypes(prev =>
+      prev.includes(docType)
+        ? prev.filter(t => t !== docType)
+        : [...prev, docType]
+    );
+  };
+
+
   const filteredSummaries = summaries
     .filter(summary =>
-      summary.title.toLowerCase().includes(searchTerm.toLowerCase())
+      summary.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      selectedRiskLevels.includes(summary.risk as RiskLevel) &&
+      selectedDocTypes.includes(summary.type)
     )
-    // Sorting logic can be implemented here based on sortOption
-    
+    .sort((a, b) => {
+        if (sortOption === 'Newest') {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        }
+        if (sortOption === 'Oldest') {
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
+        }
+        // Add relevance logic if needed
+        return 0;
+    });
+
+  const formatDate = (dateString: string) => {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+      });
+  }
 
   return (
     <div className="flex flex-col h-screen bg-background text-foreground">
@@ -105,18 +154,58 @@ export default function SummariesPage() {
         </div>
 
         <div className="flex gap-2 py-3 overflow-x-auto" style={{scrollbarWidth: 'none'}}>
-            <Button variant="outline" className="rounded-full shrink-0 border-accent bg-accent hover:bg-accent/80">
-                <span>Document Type</span>
-                <ChevronDown className="h-4 w-4 ml-1" />
-            </Button>
-            <Button variant="outline" className="rounded-full shrink-0 border-accent bg-accent hover:bg-accent/80">
-                <span>Date</span>
-                <ChevronDown className="h-4 w-4 ml-1" />
-            </Button>
-            <Button variant="outline" className="rounded-full shrink-0 border-accent bg-accent hover:bg-accent/80">
-                <span>Risk Level</span>
-                <ChevronDown className="h-4 w-4 ml-1" />
-            </Button>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="rounded-full shrink-0 border-accent bg-accent hover:bg-accent/80">
+                        <span>Document Type</span>
+                        <ChevronDown className="h-4 w-4 ml-1" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    <DropdownMenuLabel>Filter by Type</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    {ALL_DOC_TYPES.map(type => (
+                        <DropdownMenuCheckboxItem
+                            key={type}
+                            checked={selectedDocTypes.includes(type)}
+                            onCheckedChange={() => toggleDocType(type)}
+                        >
+                            {type}
+                        </DropdownMenuCheckboxItem>
+                    ))}
+                </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="rounded-full shrink-0 border-accent bg-accent hover:bg-accent/80" disabled>
+                        <span>Date</span>
+                        <ChevronDown className="h-4 w-4 ml-1" />
+                    </Button>
+                </DropdownMenuTrigger>
+            </DropdownMenu>
+
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="rounded-full shrink-0 border-accent bg-accent hover:bg-accent/80">
+                        <span>Risk Level</span>
+                        <ChevronDown className="h-4 w-4 ml-1" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    <DropdownMenuLabel>Filter by Risk</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    {ALL_RISK_LEVELS.map(level => (
+                         <DropdownMenuCheckboxItem
+                            key={level}
+                            checked={selectedRiskLevels.includes(level)}
+                            onCheckedChange={() => toggleRiskLevel(level)}
+                        >
+                            <span className="capitalize">{level}</span>
+                        </DropdownMenuCheckboxItem>
+                    ))}
+                </DropdownMenuContent>
+            </DropdownMenu>
         </div>
 
         <div className="flex items-center justify-between py-4">
@@ -153,12 +242,17 @@ export default function SummariesPage() {
                     <p className="text-sm text-muted-foreground line-clamp-2">{summary.description}</p>
                     <div className="flex justify-between items-center text-xs text-muted-foreground">
                         <span>{summary.type}</span>
-                        <span>{summary.date}</span>
+                        <span>{formatDate(summary.date)}</span>
                     </div>
                 </div>
               </Link>
             );
           })}
+           {filteredSummaries.length === 0 && (
+            <div className="text-center py-10">
+              <p className="text-muted-foreground">No summaries match your filters.</p>
+            </div>
+          )}
         </div>
       </main>
 
