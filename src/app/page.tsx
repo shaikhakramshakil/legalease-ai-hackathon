@@ -223,7 +223,7 @@ export default function Home() {
           <footer className="bg-background border-t sticky bottom-0">
             <nav className="flex justify-around p-2">
               <a
-                className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary bg-primary/10"
+                className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary"
                 href="/"
               >
                 <span className="material-symbols-outlined">home</span>
@@ -250,3 +250,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
