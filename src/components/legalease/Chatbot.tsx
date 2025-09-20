@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect, type FormEvent } from "react";
@@ -100,7 +101,7 @@ export function Chatbot({ documentText }: ChatbotProps) {
               key={index}
               className={cn(
                 "flex items-start gap-3 max-w-xs",
-                message.role === "user" ? "self-end ml-auto" : ""
+                message.role === "user" ? "self-end ml-auto" : "mr-auto"
               )}
             >
               {message.role === 'assistant' && (
@@ -121,7 +122,7 @@ export function Chatbot({ documentText }: ChatbotProps) {
             </div>
           ))}
           {isLoading && (
-             <div className="flex items-start gap-3 max-w-xs">
+             <div className="flex items-start gap-3 max-w-xs mr-auto">
                 <div className="bg-primary dark:bg-white text-white dark:text-black rounded-full p-2">
                   <span className="material-symbols-outlined text-2xl">smart_toy</span>
                 </div>
