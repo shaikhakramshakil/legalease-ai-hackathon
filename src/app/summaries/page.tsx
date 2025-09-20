@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from 'next/link';
 import { ArrowLeft, ChevronDown, CircleAlert, Search, Mic, FileText, BadgeCheck, ShieldAlert } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const summaries = [
   {
@@ -75,6 +76,61 @@ export default function SummariesPage() {
   const [sortOption, setSortOption] = useState<SortOption>("Newest");
   const [selectedRiskLevels, setSelectedRiskLevels] = useState<RiskLevel[]>(ALL_RISK_LEVELS);
   const [selectedDocTypes, setSelectedDocTypes] = useState<string[]>(ALL_DOC_TYPES);
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef<any>(null);
+  const { toast } = useToast();
+
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && ('webkitSpeechRecognition' in window)) {
+      const recognition = new (window as any).webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setSearchTerm(transcript);
+        setIsListening(false);
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error('Speech recognition error', event.error);
+        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+            toast({
+                title: "Voice Search Error",
+                description: "Microphone access was denied. Please enable it in your browser settings.",
+                variant: "destructive"
+            })
+        }
+        setIsListening(false);
+      };
+      
+      recognition.onend = () => {
+          setIsListening(false);
+      }
+
+      recognitionRef.current = recognition;
+    }
+  }, [toast]);
+
+  const handleMicClick = () => {
+    if (!recognitionRef.current) {
+        toast({
+            title: "Browser Not Supported",
+            description: "Voice search is not supported on this browser.",
+            variant: "destructive"
+        })
+        return;
+    }
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      recognitionRef.current.start();
+      setIsListening(true);
+    }
+  };
 
 
   const toggleRiskLevel = (riskLevel: RiskLevel) => {
@@ -147,9 +203,9 @@ export default function SummariesPage() {
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                 />
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                    <Mic className="h-5 w-5 text-muted-foreground" />
-                </div>
+                <button onClick={handleMicClick} className="absolute inset-y-0 right-0 flex items-center pr-3">
+                    <Mic className={`h-5 w-5 transition-colors ${isListening ? 'text-primary' : 'text-muted-foreground'}`} />
+                </button>
             </div>
         </div>
 
@@ -284,3 +340,5 @@ export default function SummariesPage() {
     </div>
   );
 }
+
+    
