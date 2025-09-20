@@ -60,7 +60,7 @@ export function FileUpload({ onAnalyze, onUseSample }: FileUploadProps) {
         </div>
         <button 
             onClick={handleButtonClick}
-            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-white text-[var(--primary-800)] text-base font-bold shadow-md transition-all hover:bg-gray-100"
+            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-white text-black text-base font-bold shadow-md transition-all hover:bg-gray-100"
         >
             <span className="truncate">Upload Document</span>
         </button>
