@@ -37,13 +37,13 @@ const prompt = ai.definePrompt({
 
   Highlight the risky clauses by wrapping them with HTML-like tags that specify a color. For example:
 
-  <red>This is a risky clause</red>
-  <yellow>This clause requires further review</yellow>
+  <high>This is a risky clause</high>
+  <medium>This clause requires further review</medium>
 
   The colors should indicate the severity of the risk:
-  - red: High risk - clauses that are likely to be unenforceable or very unfavorable to the user.
-  - yellow: Medium risk - clauses that require further review or clarification.
-  - orange: Low risk - clauses that are unusual but not necessarily unfavorable.
+  - high: High risk - clauses that are likely to be unenforceable or very unfavorable to the user.
+  - medium: Medium risk - clauses that require further review or clarification.
+  - low: Low risk - clauses that are unusual but not necessarily unfavorable.
 
   Do not add any explanations or commentary. Only highlight the clauses. Return the entire document with the highlighted clauses.
 
