@@ -100,24 +100,35 @@ export function Chatbot({ documentText }: ChatbotProps) {
             <div
               key={index}
               className={cn(
-                "flex items-start gap-3 max-w-xs",
-                message.role === "user" ? "self-end ml-auto" : "mr-auto"
+                "flex items-start gap-3 w-full",
+                message.role === "user" ? "justify-end" : "justify-start"
               )}
             >
-              {message.role === 'assistant' && (
-                <div className="bg-primary dark:bg-white text-white dark:text-black rounded-full p-2">
-                  <span className="material-symbols-outlined text-2xl">smart_toy</span>
-                </div>
-              )}
               <div
                 className={cn(
-                  "p-4 rounded-xl text-sm",
-                  message.role === "user"
-                    ? "bg-primary text-primary-foreground rounded-tr-none"
-                    : "bg-black/5 dark:bg-white/10 rounded-tl-none"
+                  "flex items-start gap-3 max-w-xs",
+                  message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                 )}
               >
-                <p>{message.content}</p>
+                {message.role === 'assistant' ? (
+                  <div className="bg-primary dark:bg-white text-white dark:text-black rounded-full p-2 flex-shrink-0">
+                    <span className="material-symbols-outlined text-2xl">smart_toy</span>
+                  </div>
+                ) : (
+                   <div className="bg-muted text-muted-foreground rounded-full p-2 flex-shrink-0">
+                    <span className="material-symbols-outlined text-2xl">person</span>
+                  </div>
+                )}
+                <div
+                  className={cn(
+                    "p-4 rounded-xl text-sm",
+                    message.role === "user"
+                      ? "bg-primary text-primary-foreground rounded-tr-none"
+                      : "bg-black/5 dark:bg-white/10 rounded-tl-none"
+                  )}
+                >
+                  <p>{message.content}</p>
+                </div>
               </div>
             </div>
           ))}
