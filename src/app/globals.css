@@ -56,6 +56,10 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  details summary::-webkit-details-marker {
+    display: none;
+  }
 }
 
 @layer components {
@@ -71,5 +75,20 @@
 
   .glass-card {
     @apply bg-gray-900/50 backdrop-blur-lg border border-white/10 rounded-xl shadow-lg;
+  }
+
+  .safe-clause {
+    @apply border-l-4 border-green-500 bg-green-500/10;
+  }
+  .risk-clause {
+    @apply border-l-4 border-red-500 bg-red-500/10;
+  }
+  .clause-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  details[open] .clause-content {
+    max-height: 500px;
   }
 }
