@@ -12,6 +12,8 @@ import {
   History,
 } from "lucide-react";
 import { TrendingTopicsChart } from "@/components/legalease/TrendingTopicsChart";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function ProfilePage() {
   return (
@@ -27,9 +29,11 @@ export default function ProfilePage() {
               <h1 className="text-lg font-bold">Alex</h1>
             </div>
           </div>
-          <button className="flex h-12 w-12 items-center justify-center text-gray-400 transition-colors hover:text-white">
-            <Settings className="h-6 w-6" />
-          </button>
+          <Button asChild variant="ghost" size="icon" className="text-gray-400 hover:text-white">
+            <Link href="/settings">
+              <Settings className="h-6 w-6" />
+            </Link>
+          </Button>
         </header>
 
         <main className="px-4 pb-4">
