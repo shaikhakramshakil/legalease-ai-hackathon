@@ -10,6 +10,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        display: ['Manrope', 'sans-serif'],
         body: ['Manrope', 'Noto Sans', 'sans-serif'],
         headline: ['Manrope', 'sans-serif'],
         code: ['monospace'],
@@ -50,7 +51,9 @@ export default {
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
+        lg: '0.5rem',
+        xl: '0.75rem',
+        '2xl': '1rem',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
