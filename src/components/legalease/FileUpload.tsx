@@ -9,16 +9,16 @@ type FileUploadProps = {
   onUseSample: () => void;
 };
 
-const acceptedFileTypes = "application/pdf,image/jpeg,image/png";
+const acceptedFileTypes = "application/pdf,image/jpeg,image/png,text/plain,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
 export function FileUpload({ onAnalyze, onUseSample }: FileUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (selectedFile: File | null) => {
-    if (selectedFile && acceptedFileTypes.includes(selectedFile.type)) {
-      onAnalyze(selectedFile);
+    if (selectedFile) {
+        onAnalyze(selectedFile);
     } else {
-      console.warn("Invalid file type selected.");
+      console.warn("No file selected.");
     }
   };
 
