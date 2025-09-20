@@ -51,7 +51,7 @@ export function AppFooter() {
                 })}
 
                 <Link href="/" passHref>
-                    <Button variant="default" size="icon" className="w-16 h-16 rounded-full shadow-lg -translate-y-2.5">
+                    <Button variant="default" size="icon" className="w-16 h-16 rounded-full shadow-lg">
                         <span className="material-symbols-outlined text-3xl">add</span>
                     </Button>
                 </Link>
