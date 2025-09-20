@@ -70,23 +70,47 @@ export function Chatbot({ documentText }: ChatbotProps) {
   }, [documentText])
 
   return (
-    <div className="flex flex-col h-full w-full">
-      <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
+    <div className="flex flex-col h-full w-full bg-background text-foreground">
+      <header className="flex items-center justify-between p-4 border-b">
+        <button className="p-2 -m-2">
+          <span className="material-symbols-outlined">arrow_back_ios_new</span>
+        </button>
+        <div className="flex flex-col items-center">
+          <h1 className="text-xl font-bold">AI Assistant</h1>
+          <span className="text-xs text-green-500 flex items-center gap-1">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            Online
+          </span>
+        </div>
+        <button className="p-2 -m-2">
+          <span className="material-symbols-outlined">more_vert</span>
+        </button>
+      </header>
+
+      <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
         <div className="space-y-6">
           {messages.map((message, index) => (
             <div
               key={index}
               className={cn(
-                "flex items-end gap-2",
-                message.role === "user" ? "justify-end" : "justify-start"
+                "flex items-start gap-3 max-w-xs",
+                message.role === "user" ? "self-end" : ""
               )}
             >
+              {message.role === 'assistant' && (
+                <div className="bg-primary dark:bg-white text-white dark:text-black rounded-full p-2">
+                  <span className="material-symbols-outlined text-2xl">smart_toy</span>
+                </div>
+              )}
               <div
                 className={cn(
-                  "max-w-[75%] rounded-2xl p-3 text-sm",
+                  "p-4 rounded-xl text-sm",
                   message.role === "user"
-                    ? "bg-primary text-primary-foreground rounded-br-none"
-                    : "bg-muted text-muted-foreground rounded-bl-none"
+                    ? "bg-primary text-primary-foreground rounded-tr-none"
+                    : "bg-black/5 dark:bg-white/10 rounded-tl-none"
                 )}
               >
                 <p>{message.content}</p>
@@ -94,15 +118,18 @@ export function Chatbot({ documentText }: ChatbotProps) {
             </div>
           ))}
           {isLoading && (
-             <div className="flex items-end gap-2 justify-start">
-                <div className="max-w-[75%] rounded-2xl p-3 text-sm bg-muted text-muted-foreground rounded-bl-none">
+             <div className="flex items-start gap-3 max-w-xs">
+                <div className="bg-primary dark:bg-white text-white dark:text-black rounded-full p-2">
+                  <span className="material-symbols-outlined text-2xl">smart_toy</span>
+                </div>
+                <div className="bg-black/5 dark:bg-white/10 p-4 rounded-xl rounded-tl-none">
                     <Loader2 className="h-5 w-5 animate-spin" />
                 </div>
              </div>
           )}
         </div>
       </ScrollArea>
-      <div className="p-4 border-t">
+      <footer className="p-4 border-t">
         <form onSubmit={handleSubmit} className="flex items-center gap-2">
           <Input
             type="text"
@@ -110,13 +137,13 @@ export function Chatbot({ documentText }: ChatbotProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             disabled={isLoading || !documentText}
-            className="flex-1"
+            className="flex-1 bg-black/5 dark:bg-white/10 border-transparent focus:border-primary dark:focus:border-white focus:ring-0 rounded-full py-3 px-5 h-auto"
           />
-          <Button type="submit" size="icon" disabled={isLoading || !query.trim()}>
+          <Button type="submit" size="icon" className="bg-primary dark:bg-white text-white dark:text-black rounded-full w-12 h-12 hover:bg-black/80 dark:hover:bg-gray-200 transition-colors shrink-0" disabled={isLoading || !query.trim()}>
             <Send className="h-5 w-5" />
           </Button>
         </form>
-      </div>
+      </footer>
     </div>
   );
 }

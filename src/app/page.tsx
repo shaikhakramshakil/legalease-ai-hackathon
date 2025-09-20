@@ -213,10 +213,7 @@ export default function Home() {
               <MessageSquare className="h-8 w-8" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="bottom" className="h-[90vh] flex flex-col rounded-t-2xl">
-            <SheetHeader className="text-left">
-              <SheetTitle>AI Legal Assistant</SheetTitle>
-            </SheetHeader>
+          <SheetContent side="bottom" className="h-screen w-screen flex flex-col p-0 border-0">
             <Chatbot documentText={documentText} />
           </SheetContent>
         </Sheet>
