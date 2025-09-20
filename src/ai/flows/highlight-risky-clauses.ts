@@ -39,6 +39,7 @@ const prompt = ai.definePrompt({
 
   <high>This is a risky clause</high>
   <medium>This clause requires further review</medium>
+  <low>This is a low-risk clause</low>
 
   The colors should indicate the severity of the risk:
   - high: High risk - clauses that are likely to be unenforceable or very unfavorable to the user.

@@ -63,20 +63,6 @@
 }
 
 @layer components {
-  .highlight-red {
-    @apply bg-red-900/40 p-1 rounded-md border-b-2 border-red-700;
-  }
-  .highlight-yellow {
-    @apply bg-yellow-900/40 p-1 rounded-md border-b-2 border-yellow-700;
-  }
-  .highlight-orange {
-     @apply bg-orange-900/40 p-1 rounded-md border-b-2 border-orange-700;
-  }
-
-  .glass-card {
-    @apply bg-gray-900/50 backdrop-blur-lg border border-white/10 rounded-xl shadow-lg;
-  }
-
   .safe-clause {
     @apply border-l-4 border-green-500 bg-green-500/10;
   }

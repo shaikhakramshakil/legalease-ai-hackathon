@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useRef, type DragEvent } from "react";
+import { useRef, type DragEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { UploadCloud } from "lucide-react";
 
 type FileUploadProps = {
   onAnalyze: (file: File) => void;

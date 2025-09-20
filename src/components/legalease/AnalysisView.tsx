@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, Fragment, type ReactNode, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { translateSummaryAction } from "@/app/actions";
 import { Loader2 } from "lucide-react";

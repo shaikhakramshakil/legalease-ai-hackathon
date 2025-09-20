@@ -1,23 +1,7 @@
 "use client";
 
-import {
-  FileUp,
-  Landmark,
-  FileText,
-  Briefcase,
-  MessageSquare,
-  History,
-  Home as HomeIcon,
-  User,
-  ChevronRight,
-  ShieldCheck,
-  Gavel,
-  Menu,
-  Bell,
-  UploadFile,
-} from "lucide-react";
+import { Menu, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AppHeader } from "@/components/legalease/AppHeader";
 import { useState } from "react";
 import { FileUpload } from "@/components/legalease/FileUpload";
 import { LoadingState } from "@/components/legalease/LoadingState";
@@ -31,10 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
-  SheetClose
 } from "@/components/ui/sheet";
 import { Chatbot } from "@/components/legalease/Chatbot";
 
@@ -232,7 +213,7 @@ export default function Home() {
             <nav className="flex justify-around p-2">
               <a
                 className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary bg-primary/10"
-                href="#"
+                href="/"
               >
                 <span className="material-symbols-outlined">upload</span>
                 <span className="text-xs font-medium">Upload</span>

@@ -8,12 +8,6 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   safelist: [
-    'bg-red-500',
-    'bg-orange-500',
-    'bg-yellow-500',
-    'text-red-500',
-    'text-orange-500',
-    'text-yellow-500',
     'bg-high',
     'bg-medium',
     'bg-low',
@@ -103,34 +97,15 @@ export default {
             '0%, 100%': { backgroundColor: 'rgba(255, 170, 0, 0.2)' },
             '50%': { backgroundColor: 'rgba(255, 170, 0, 0.4)' },
         },
-        'fade-in': {
-            '0%': { opacity: '0', transform: 'translateY(10px)' },
-            '100%': { opacity: '1', transform: 'translateY(0)' },
-        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'pulse-bg': 'pulse-bg 3s infinite',
-        'fade-in': 'fade-in 0.5s ease-out forwards',
       },
     },
   },
   plugins: [
     require('tailwindcss-animate'),
-    function({ addUtilities }: { addUtilities: any}) {
-      const newUtilities = {
-        '.animation-delay-200': {
-          'animation-delay': '200ms',
-        },
-        '.animation-delay-400': {
-          'animation-delay': '400ms',
-        },
-        '.animation-delay-600': {
-          'animation-delay': '600ms',
-        },
-      }
-      addUtilities(newUtilities)
-    }
   ],
 } satisfies Config;

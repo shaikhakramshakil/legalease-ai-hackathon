@@ -1,6 +1,12 @@
-// Summarize the key clauses (payment dates, penalties, renewals, and liabilities) of a legal document.
-
 'use server';
+
+/**
+ * @fileOverview Summarizes the key clauses (payment dates, penalties, renewals, and liabilities) of a legal document.
+ *
+ * - summarizeLegalDocument - A function that handles the summarization.
+ * - SummarizeLegalDocumentInput - The input type for the summarizeLegalDocument function.
+ * - SummarizeLegalDocumentOutput - The return type for the summarizeLegalDocument function.
+ */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
@@ -23,12 +29,13 @@ const summarizeLegalDocumentPrompt = ai.definePrompt({
   name: 'summarizeLegalDocumentPrompt',
   input: {schema: SummarizeLegalDocumentInputSchema},
   output: {schema: SummarizeLegalDocumentOutputSchema},
-  prompt: `You are an expert legal summarizer.
+  prompt: `You are an expert legal summarizer. You are an expert in Indian law.
 
-  Summarize the following legal document, highlighting key clauses related to payment dates, penalties, renewals, and liabilities. Be as concise as possible.
+  Summarize the following legal document, highlighting key clauses related to payment dates, penalties, renewals, and liabilities. 
+  Be as concise as possible, writing in simple, easy-to-understand language.
 
   Document:
-  {{documentText}}`,
+  {{{documentText}}}`,
 });
 
 const summarizeLegalDocumentFlow = ai.defineFlow(
