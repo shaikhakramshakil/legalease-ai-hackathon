@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -22,7 +23,7 @@ export function AppSidebar() {
   const userAvatar = PlaceHolderImages.find(p => p.id === 'user-avatar');
 
   return (
-    <div className="flex flex-col h-full bg-background text-foreground p-4 shadow-2xl">
+    <div className="flex flex-col h-full bg-white/5 backdrop-blur-lg text-foreground p-4 shadow-2xl">
       <div className="p-4 pb-2 flex items-center gap-4">
         {userAvatar && (
             <Image
@@ -54,7 +55,7 @@ export function AppSidebar() {
           </li>
           <li>
             <Link
-              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
               href="#"
             >
               <span className="material-symbols-outlined">add_circle</span>
@@ -63,7 +64,7 @@ export function AppSidebar() {
           </li>
           <li>
             <Link
-              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
               href="#"
             >
               <span className="material-symbols-outlined">history</span>
@@ -77,7 +78,7 @@ export function AppSidebar() {
           </li>
           <li>
             <Link
-              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
               href="#"
             >
               <span className="material-symbols-outlined">gavel</span>
@@ -86,7 +87,7 @@ export function AppSidebar() {
           </li>
           <li>
             <Link
-              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
               href="#"
             >
               <span className="material-symbols-outlined">school</span>
@@ -95,7 +96,7 @@ export function AppSidebar() {
           </li>
           <li>
             <Link
-              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
               href="#"
             >
               <span className="material-symbols-outlined">menu_book</span>
@@ -109,7 +110,7 @@ export function AppSidebar() {
           </li>
           <li>
             <Link
-              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
               href="#"
             >
               <span className="material-symbols-outlined">share</span>
@@ -118,7 +119,7 @@ export function AppSidebar() {
           </li>
           <li>
             <Link
-              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
               href="/settings"
             >
               <span className="material-symbols-outlined">settings</span>
@@ -127,7 +128,7 @@ export function AppSidebar() {
           </li>
           <li>
             <Link
-              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
               href="#"
             >
               <span className="material-symbols-outlined">help</span>
@@ -135,10 +136,10 @@ export function AppSidebar() {
             </Link>
           </li>
         </ul>
-        <ul className="border-t border-border pt-2">
+        <ul className="border-t border-white/10 pt-2">
           <li>
             <a
-              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
+              className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
               href="#"
             >
               <span className="material-symbols-outlined">logout</span>
