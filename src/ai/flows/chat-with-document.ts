@@ -12,14 +12,14 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const ChatWithDocumentInputSchema = z.object({
-  documentText: z.string().describe('The text content of the legal document.'),
-  query: z.string().describe('The user\'s question about the document.'),
+  documentText: z.string(),
+  query: z.string(),
 });
 
 export type ChatWithDocumentInput = z.infer<typeof ChatWithDocumentInputSchema>;
 
 const ChatWithDocumentOutputSchema = z.object({
-  answer: z.string().describe('The AI\'s answer to the user\'s question.'),
+  answer: z.string(),
 });
 
 export type ChatWithDocumentOutput = z.infer<typeof ChatWithDocumentOutputSchema>;

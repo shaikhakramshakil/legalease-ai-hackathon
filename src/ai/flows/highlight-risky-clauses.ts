@@ -12,13 +12,13 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const HighlightRiskyClausesInputSchema = z.object({
-  documentText: z.string().describe('The text content of the legal document.'),
+  documentText: z.string(),
 });
 
 export type HighlightRiskyClausesInput = z.infer<typeof HighlightRiskyClausesInputSchema>;
 
 const HighlightRiskyClausesOutputSchema = z.object({
-  highlightedText: z.string().describe('The legal document text with risky clauses highlighted using color-coded tags.'),
+  highlightedText: z.string(),
 });
 
 export type HighlightRiskyClausesOutput = z.infer<typeof HighlightRiskyClausesOutputSchema>;

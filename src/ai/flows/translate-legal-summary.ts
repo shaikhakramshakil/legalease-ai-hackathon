@@ -12,14 +12,14 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const TranslateLegalSummaryInputSchema = z.object({
-  englishSummary: z.string().describe('The legal summary in English.'),
+  englishSummary: z.string(),
 });
 export type TranslateLegalSummaryInput = z.infer<
   typeof TranslateLegalSummaryInputSchema
 >;
 
 const TranslateLegalSummaryOutputSchema = z.object({
-  hindiSummary: z.string().describe('The legal summary in Hindi.'),
+  hindiSummary: z.string(),
 });
 export type TranslateLegalSummaryOutput = z.infer<
   typeof TranslateLegalSummaryOutputSchema

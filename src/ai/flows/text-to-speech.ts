@@ -15,12 +15,12 @@ import { z } from 'genkit';
 import wav from 'wav';
 
 const TextToSpeechInputSchema = z.object({
-  text: z.string().describe('The text to be converted to speech.'),
+  text: z.string(),
 });
 export type TextToSpeechInput = z.infer<typeof TextToSpeechInputSchema>;
 
 const TextToSpeechOutputSchema = z.object({
-  audioDataUri: z.string().describe('The synthesized audio as a data URI.'),
+  audioDataUri: z.string(),
 });
 export type TextToSpeechOutput = z.infer<typeof TextToSpeechOutputSchema>;
 

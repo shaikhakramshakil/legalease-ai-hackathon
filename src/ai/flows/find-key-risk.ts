@@ -12,15 +12,15 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const FindKeyRiskInputSchema = z.object({
-  documentText: z.string().describe('The text content of the legal document.'),
+  documentText: z.string(),
 });
 export type FindKeyRiskInput = z.infer<typeof FindKeyRiskInputSchema>;
 
 const FindKeyRiskOutputSchema = z.object({
-  hasRisk: z.boolean().describe('Whether any risk was identified.'),
-  riskLevel: z.enum(['high', 'medium', 'low', 'none']).describe('The level of the most critical risk found.'),
-  riskTitle: z.string().optional().describe('A short title for the key risk (e.g., "Termination Clause").'),
-  riskExplanation: z.string().optional().describe('A simple, one-sentence explanation of the key risk.'),
+  hasRisk: z.boolean(),
+  riskLevel: z.enum(['high', 'medium', 'low', 'none']),
+  riskTitle: z.string().optional(),
+  riskExplanation: z.string().optional(),
 });
 export type FindKeyRiskOutput = z.infer<typeof FindKeyRiskOutputSchema>;
 

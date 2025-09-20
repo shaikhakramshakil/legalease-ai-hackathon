@@ -12,12 +12,12 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const SummarizeLegalDocumentInputSchema = z.object({
-  documentText: z.string().describe('The text of the legal document to summarize.'),
+  documentText: z.string(),
 });
 export type SummarizeLegalDocumentInput = z.infer<typeof SummarizeLegalDocumentInputSchema>;
 
 const SummarizeLegalDocumentOutputSchema = z.object({
-  summary: z.string().describe('A concise summary of the legal document, highlighting key clauses related to payment dates, penalties, renewals, and liabilities.'),
+  summary: z.string(),
 });
 export type SummarizeLegalDocumentOutput = z.infer<typeof SummarizeLegalDocumentOutputSchema>;
 

@@ -13,17 +13,15 @@ import {z} from 'genkit';
 import {TextToSpeechClient} from '@google-cloud/text-to-speech';
 
 const GoogleCloudTextToSpeechInputSchema = z.object({
-  text: z.string().describe('The text to be converted to speech.'),
-  languageCode: z.enum(['en-US', 'hi-IN']).default('en-US').describe('The language of the text.'),
+  text: z.string(),
+  languageCode: z.enum(['en-US', 'hi-IN']).default('en-US'),
 });
 export type GoogleCloudTextToSpeechInput = z.infer<
   typeof GoogleCloudTextToSpeechInputSchema
 >;
 
 const GoogleCloudTextToSpeechOutputSchema = z.object({
-  audioDataUri: z
-    .string()
-    .describe('The synthesized audio as a base64 data URI.'),
+  audioDataUri: z.string(),
 });
 export type GoogleCloudTextToSpeechOutput = z.infer<
   typeof GoogleCloudTextToSpeechOutputSchema
