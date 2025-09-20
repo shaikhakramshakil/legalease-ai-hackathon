@@ -42,7 +42,7 @@ export default function ProfilePage() {
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col text-white">
       
-      <div className="relative z-10 flex-grow pb-24">
+      <div className="relative z-10 flex-grow pb-28">
         <header className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">

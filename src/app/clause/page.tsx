@@ -26,7 +26,7 @@ export default function ClausePage() {
                     <div className="w-8"></div>
                 </div>
             </header>
-            <main className="flex-grow overflow-y-auto p-6 space-y-8">
+            <main className="flex-grow overflow-y-auto p-6 space-y-8 pb-28">
                 <section>
                     <h2 className="text-lg font-semibold text-foreground mb-3">Plain Language Breakdown</h2>
                     <div className="space-y-4 text-muted-foreground glass-card p-4">

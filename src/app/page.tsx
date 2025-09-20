@@ -198,7 +198,7 @@ export default function Home() {
       </header>
       )}
 
-      <main className={`flex-1 flex flex-col overflow-y-auto ${appState === 'initial' ? 'p-6 pb-24': 'pb-24'}`}>
+      <main className={`flex-1 flex flex-col overflow-y-auto ${appState === 'initial' ? 'p-6 pb-28': 'pb-28'}`}>
         {appState === "initial" && renderInitialState()}
         {appState === "loading" && <LoadingState />}
         {appState === "risk-alert" && analysisResult && (
