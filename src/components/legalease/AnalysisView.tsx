@@ -181,9 +181,10 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
 
     } catch (error) {
       console.error(error);
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred.";
       toast({
         title: "Failed to Read Aloud",
-        description: "Could not generate audio for the summary.",
+        description: `Could not generate audio for the summary. ${errorMessage}`,
         variant: "destructive",
       });
     } finally {
@@ -309,7 +310,7 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
         <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-foreground">Plain-Language Summary</h2>
              <div className="flex items-center gap-2">
-                <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isGeneratingAudio || (currentLanguage === 'hi-IN' && isTranslating)}>
+                <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isGeneratingAudio || isTranslating}>
                     {isGeneratingAudio ? <Loader2 className="animate-spin" size={24}/> :  <span className="material-symbols-outlined text-2xl"> {isReading ? 'pause_circle' : 'play_circle'} </span>}
                 </button>
                 <div className="flex items-center rounded-full bg-accent p-1">
@@ -376,5 +377,3 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
     </div>
   );
 }
-
-    

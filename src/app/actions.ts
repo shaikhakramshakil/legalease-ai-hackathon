@@ -1,3 +1,4 @@
+
 'use server';
 
 import { summarizeLegalDocument } from '@/ai/flows/summarize-legal-document';
@@ -91,6 +92,7 @@ export async function textToSpeechAction(text: string, language: 'en-US' | 'hi-I
         return result.audioDataUri;
     } catch(error) {
         console.error("Error in textToSpeechAction:", error);
-        throw new Error("Failed to generate audio due to a server error.");
+        const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+        throw new Error(`Failed to generate audio due to a server error: ${errorMessage}`);
     }
 }
