@@ -18,6 +18,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Chatbot } from "@/components/legalease/Chatbot";
+import { AppSidebar } from "@/components/legalease/AppSidebar";
+
 
 type AppState = "initial" | "loading" | "error" | "result" | "risk-alert";
 type AnalysisResult = {
@@ -34,6 +36,7 @@ export default function Home() {
   );
   const [documentText, setDocumentText] = useState<string>("");
   const { toast } = useToast();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleAnalyze = async (file: File) => {
     setAppState("loading");
@@ -169,9 +172,16 @@ export default function Home() {
     <div className="flex flex-col h-screen justify-between bg-background text-foreground">
      {appState !== 'risk-alert' && (
       <header className="flex items-center justify-between p-4 border-b">
-        <Button variant="ghost" size="icon">
-          <Menu />
-        </Button>
+         <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
+            <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                    <Menu />
+                </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-80 p-0">
+                <AppSidebar />
+            </SheetContent>
+        </Sheet>
         <h1 className="text-xl font-bold">Simplify Document</h1>
         <Button variant="ghost" size="icon">
           <Bell />
