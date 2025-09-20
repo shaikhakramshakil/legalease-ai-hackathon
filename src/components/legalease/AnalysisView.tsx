@@ -309,9 +309,28 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
         <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-foreground">Plain-Language Summary</h2>
              <div className="flex items-center gap-2">
-                <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isGeneratingAudio || isTranslating}>
+                <button onClick={handleReadAloud} className="p-2 -m-2 text-primary flex items-center gap-1" disabled={isGeneratingAudio || (currentLanguage === 'hi-IN' && isTranslating)}>
                     {isGeneratingAudio ? <Loader2 className="animate-spin" size={24}/> :  <span className="material-symbols-outlined text-2xl"> {isReading ? 'pause_circle' : 'play_circle'} </span>}
                 </button>
+                <div className="flex items-center rounded-full bg-accent p-1">
+                     <Button
+                        variant={currentLanguage === 'en-US' ? 'default' : 'ghost'}
+                        size="sm"
+                        className="rounded-full"
+                        onClick={() => handleLanguageChange('en-US')}
+                    >
+                        English
+                    </Button>
+                    <Button
+                        variant={currentLanguage === 'hi-IN' ? 'default' : 'ghost'}
+                        size="sm"
+                        className="rounded-full"
+                        onClick={() => handleLanguageChange('hi-IN')}
+                        disabled={isTranslating}
+                    >
+                        {isTranslating ? <Loader2 className="animate-spin" size={16}/> : 'हिन्दी'}
+                    </Button>
+                </div>
             </div>
         </div>
          <div className="text-muted-foreground leading-relaxed mb-8">
@@ -321,25 +340,6 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
 
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-foreground">Key Clauses</h2>
-            <div className="flex items-center rounded-full bg-accent p-1">
-                 <Button
-                    variant={currentLanguage === 'en-US' ? 'default' : 'ghost'}
-                    size="sm"
-                    className="rounded-full"
-                    onClick={() => handleLanguageChange('en-US')}
-                >
-                    English
-                </Button>
-                <Button
-                    variant={currentLanguage === 'hi-IN' ? 'default' : 'ghost'}
-                    size="sm"
-                    className="rounded-full"
-                    onClick={() => handleLanguageChange('hi-IN')}
-                    disabled={isTranslating}
-                >
-                    {isTranslating ? <Loader2 className="animate-spin" size={16}/> : 'हिन्दी'}
-                </Button>
-            </div>
         </div>
 
         <div className="space-y-4">
