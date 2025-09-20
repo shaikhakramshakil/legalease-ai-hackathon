@@ -20,6 +20,14 @@ import {
 } from "@/components/ui/sheet";
 import { Chatbot } from "@/components/legalease/Chatbot";
 import { AppSidebar } from "@/components/legalease/AppSidebar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 
 type AppState = "initial" | "loading" | "error" | "result" | "risk-alert";
@@ -184,12 +192,23 @@ export default function Home() {
             </SheetContent>
         </Sheet>
         <h1 className="text-xl font-bold">LegalEase AI</h1>
-        <div className="relative">
-          <Button variant="ghost" size="icon">
-            <Bell />
-          </Button>
-          <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></div>
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <div className="relative">
+              <Button variant="ghost" size="icon">
+                <Bell />
+              </Button>
+              <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></div>
+            </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>New document analyzed: NDA_v2.pdf</DropdownMenuItem>
+            <DropdownMenuItem>Risk found in "Employment Contract.docx"</DropdownMenuItem>
+            <DropdownMenuItem>Summary for "Lease_Agreement.pdf" is ready</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </header>
       )}
 
@@ -253,7 +272,5 @@ export default function Home() {
     </div>
   );
 }
-
-    
 
     
