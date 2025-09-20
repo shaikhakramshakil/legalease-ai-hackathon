@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
@@ -133,7 +134,7 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
         </div>
       </header>
 
-      <main className="flex-1 px-5 pt-8 pb-4">
+      <main className="flex-1 px-5 pt-4 pb-4">
         <div className="mb-8 p-6 rounded-xl bg-card">
           <h2 className="text-sm font-semibold uppercase text-muted-foreground tracking-wider mb-4">Overall Risk Level</h2>
           <div className="mb-6">
