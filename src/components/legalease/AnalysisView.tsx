@@ -122,12 +122,13 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
 
   return (
     <div className="min-h-screen flex flex-col animate-in fade-in duration-500">
-      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm">
-        <div className="flex items-center p-4">
+      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b">
+        <div className="flex items-center justify-between p-4">
           <button onClick={onReset} className="p-2 -m-2 text-muted-foreground">
             <span className="material-symbols-outlined"> arrow_back_ios_new </span>
           </button>
-          <h1 className="flex-1 text-center text-lg font-bold text-foreground pr-8">Summary</h1>
+          <h1 className="text-lg font-bold text-foreground">Summary</h1>
+          <div className="w-6"></div>
         </div>
       </header>
 
