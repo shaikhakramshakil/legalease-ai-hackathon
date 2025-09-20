@@ -23,7 +23,7 @@ export default function Home() {
         <div className="flex justify-around py-2">
           <a
             className="flex w-1/3 flex-col items-center justify-center gap-1 text-white"
-            href="#"
+            href="/"
           >
             <HomeIcon />
             <span className="text-xs font-medium">Home</span>
@@ -37,7 +37,7 @@ export default function Home() {
           </a>
           <a
             className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400"
-            href="#"
+            href="/profile"
           >
             <User />
             <span className="text-xs font-medium">Profile</span>
