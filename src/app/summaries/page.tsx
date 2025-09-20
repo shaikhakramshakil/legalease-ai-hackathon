@@ -15,6 +15,7 @@ import {
 import Link from 'next/link';
 import { ArrowLeft, ChevronDown, CircleAlert, Search, Mic, FileText, BadgeCheck, ShieldAlert } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { AppFooter } from '@/components/legalease/AppFooter';
 
 const summaries = [
   {
@@ -312,31 +313,7 @@ export default function SummariesPage() {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 glass-card rounded-t-none">
-        <nav className="flex justify-around py-2">
-          <Link
-            href="/"
-            className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
-          >
-            <span className="material-symbols-outlined">home</span>
-            <span className="text-xs font-medium">Home</span>
-          </Link>
-          <Link
-            href="/summaries"
-            className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary"
-          >
-            <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>description</span>
-            <span className="text-xs font-medium">Summaries</span>
-          </Link>
-          <Link
-            href="/profile"
-            className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
-          >
-            <span className="material-symbols-outlined">person</span>
-            <span className="text-xs font-medium">Account</span>
-          </Link>
-        </nav>
-      </footer>
+      <AppFooter />
     </div>
   );
 }

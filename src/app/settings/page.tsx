@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { AppFooter } from '@/components/legalease/AppFooter';
 
 export default function SettingsPage() {
     const userAvatar = PlaceHolderImages.find(p => p.id === 'user-avatar');
@@ -138,22 +139,7 @@ export default function SettingsPage() {
                 </div>
             </main>
 
-            <footer className="fixed bottom-0 left-0 right-0 glass-card rounded-t-none">
-                <div className="flex justify-around py-2 px-4">
-                    <Link href="/" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
-                        <span className="material-symbols-outlined">upload_file</span>
-                        <span className="text-xs">Upload</span>
-                    </Link>
-                    <Link href="/summaries" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
-                        <span className="material-symbols-outlined">description</span>
-                        <span className="text-xs">Summaries</span>
-                    </Link>
-                    <Link href="/profile" className="flex flex-col items-center gap-1 text-primary">
-                        <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>person</span>
-                        <span className="text-xs font-bold">Account</span>
-                    </Link>
-                </div>
-            </footer>
+            <AppFooter />
         </div>
     );
 }

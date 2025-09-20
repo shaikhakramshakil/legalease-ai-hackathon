@@ -22,6 +22,7 @@ import { Chatbot } from "@/components/legalease/Chatbot";
 import { AppSidebar } from "@/components/legalease/AppSidebar";
 import Link from "next/link";
 import { Logo } from "@/components/legalease/Logo";
+import { AppFooter } from "@/components/legalease/AppFooter";
 
 
 type AppState = "initial" | "loading" | "error" | "result" | "risk-alert";
@@ -181,7 +182,7 @@ export default function Home() {
                     <Menu className="h-6 w-6" />
                 </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[83.33%] p-0 bg-transparent border-0">
+            <SheetContent side="left" className="w-[320px] p-0 bg-transparent border-0">
                 <AppSidebar />
             </SheetContent>
         </Sheet>
@@ -197,7 +198,7 @@ export default function Home() {
       </header>
       )}
 
-      <main className={`flex-1 flex flex-col overflow-y-auto ${appState === 'initial' ? 'p-6': ''}`}>
+      <main className={`flex-1 flex flex-col overflow-y-auto ${appState === 'initial' ? 'p-6 pb-24': 'pb-24'}`}>
         {appState === "initial" && renderInitialState()}
         {appState === "loading" && <LoadingState />}
         {appState === "risk-alert" && analysisResult && (
@@ -214,7 +215,7 @@ export default function Home() {
 
        {(appState === 'initial' || appState === 'result') && (
         <>
-          <div className="fixed bottom-24 right-6">
+          <div className="fixed bottom-24 right-6 z-20">
             <Sheet>
               <SheetTrigger asChild>
                 <Button className="glass-card rounded-full p-4 shadow-lg hover:bg-white/20 transition-transform transform hover:scale-105">
@@ -227,31 +228,7 @@ export default function Home() {
             </Sheet>
           </div>
 
-          <footer className="glass-card sticky bottom-0 rounded-t-none">
-            <nav className="flex justify-around p-2">
-              <Link
-                href="/"
-                className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary"
-              >
-                <span className="material-symbols-outlined">home</span>
-                <span className="text-xs font-medium">Home</span>
-              </Link>
-              <Link
-                href="/summaries"
-                className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
-              >
-                <span className="material-symbols-outlined">description</span>
-                <span className="text-xs font-medium">Summaries</span>
-              </Link>
-              <Link
-                href="/profile"
-                className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
-              >
-                <span className="material-symbols-outlined">person</span>
-                <span className="text-xs font-medium">Account</span>
-              </Link>
-            </nav>
-          </footer>
+          <AppFooter />
         </>
        )}
     </div>

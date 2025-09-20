@@ -9,12 +9,11 @@ import {
   FileText,
   Gavel,
   ChevronRight,
-  Home as HomeIcon,
-  History,
 } from "lucide-react";
 import { TrendingTopicsChart } from "@/components/legalease/TrendingTopicsChart";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { AppFooter } from "@/components/legalease/AppFooter";
 
 export default function ProfilePage() {
   return (
@@ -120,31 +119,7 @@ export default function ProfilePage() {
         </main>
       </div>
 
-      <nav className="fixed bottom-0 left-0 right-0 glass-card rounded-t-none">
-        <div className="flex justify-around py-2">
-          <Link
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400 transition-transform duration-200 hover:scale-110 hover:text-white"
-            href="/"
-          >
-            <HomeIcon />
-            <span className="text-xs font-medium">Home</span>
-          </Link>
-          <Link
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400 transition-transform duration-200 hover:scale-110 hover:text-white"
-            href="/summaries"
-          >
-            <History />
-            <span className="text-xs font-medium">Summaries</span>
-          </Link>
-          <Link
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-white transition-transform duration-200 hover:scale-110"
-            href="/profile"
-          >
-            <User />
-            <span className="text-xs font-medium">Profile</span>
-          </Link>
-        </div>
-      </nav>
+      <AppFooter />
     </div>
   );
 }
