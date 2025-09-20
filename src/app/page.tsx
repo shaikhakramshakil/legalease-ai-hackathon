@@ -12,6 +12,9 @@ import {
   ChevronRight,
   ShieldCheck,
   Gavel,
+  Menu,
+  Bell,
+  UploadFile,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AppHeader } from "@/components/legalease/AppHeader";
@@ -91,159 +94,148 @@ export default function Home() {
     setDocumentText("");
   };
 
-  return (
-    <div className="relative flex h-auto min-h-screen w-full flex-col bg-black text-white">
-      <div className="flex-grow">
-        <AppHeader />
-        <main className="px-4 pb-24">
-          {appState === "initial" && (
-            <div className="animate-in fade-in duration-500">
-              <section className="mb-8">
-                <FileUpload
-                  onAnalyze={handleAnalyze}
-                  onUseSample={handleUseSample}
-                />
-              </section>
+  const renderInitialState = () => (
+    <div className="w-full max-w-md mx-auto">
+      <div className="relative flex flex-col items-center justify-center p-8 border-2 border-dashed border-black/50 dark:border-white/50 rounded-2xl bg-black/5 dark:bg-white/5 mb-8">
+        <span className="material-symbols-outlined text-6xl text-primary dark:text-white mb-4">
+          upload_file
+        </span>
+        <h2 className="text-xl font-bold mb-2">Upload Your Document</h2>
+        <p className="text-sm text-center text-black/60 dark:text-white/60 mb-6">
+          Let our AI clarify jargon, highlight risks, and provide
+          easy-to-understand explanations.
+        </p>
+        <FileUpload
+          onAnalyze={handleAnalyze}
+          onUseSample={handleUseSample}
+        />
+        <p className="text-xs text-black/50 dark:text-white/50 mt-4">
+          PDF, DOCX, TXT accepted
+        </p>
+      </div>
 
-              {/* Templates Section */}
-              <section className="mb-8">
-                <h3 className="mb-4 text-lg font-semibold">
-                  Or start with a template
-                </h3>
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <button
-                    onClick={handleUseSample}
-                    className="flex flex-col items-center justify-center gap-2 rounded-xl bg-gray-900/70 p-4 transition-colors hover:bg-gray-800"
-                  >
-                    <Landmark className="h-6 w-6" />
-                    <span className="text-sm font-medium">NDA</span>
-                  </button>
-                  <button
-                    onClick={handleUseSample}
-                    className="flex flex-col items-center justify-center gap-2 rounded-xl bg-gray-900/70 p-4 transition-colors hover:bg-gray-800"
-                  >
-                    <FileText className="h-6 w-6" />
-                    <span className="text-sm font-medium">Lease</span>
-                  </button>
-                  <button
-                    onClick={handleUseSample}
-                    className="flex flex-col items-center justify-center gap-2 rounded-xl bg-gray-900/70 p-4 transition-colors hover:bg-gray-800"
-                  >
-                    <Briefcase className="h-6 w-6" />
-                    <span className="text-sm font-medium">Contract</span>
-                  </button>
-                </div>
-              </section>
+      <div className="mb-8">
+        <h3 className="text-lg font-semibold mb-3">Or start with a template</h3>
+        <div className="grid grid-cols-3 gap-4 text-center">
+          <button onClick={handleUseSample} className="flex flex-col items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+            <span className="material-symbols-outlined text-3xl mb-1">
+              gavel
+            </span>
+            <span className="text-xs font-medium">NDA</span>
+          </button>
+          <button onClick={handleUseSample} className="flex flex-col items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+            <span className="material-symbols-outlined text-3xl mb-1">
+              real_estate_agent
+            </span>
+            <span className="text-xs font-medium">Lease</span>
+          </button>
+          <button onClick={handleUseSample} className="flex flex-col items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+            <span className="material-symbols-outlined text-3xl mb-1">
+              work
+            </span>
+            <span className="text-xs font-medium">Contract</span>
+          </button>
+        </div>
+      </div>
 
-              {/* Recent Documents Section */}
-              <section>
-                <h3 className="mb-4 text-lg font-semibold">
-                  Recent Documents
-                </h3>
-                <div className="space-y-3">
-                  <div className="glass-card flex items-center justify-between rounded-xl p-4 transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
-                    <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 rounded-lg bg-black/40 p-3">
-                        <FileText className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">
-                          Tenancy_Agreement_v2.pdf
-                        </h4>
-                        <p className="text-sm text-white/60">
-                          Analyzed 2 days ago
-                        </p>
-                      </div>
-                    </div>
-                    <ChevronRight className="h-5 w-5 text-white/60" />
-                  </div>
-                  <div className="glass-card flex items-center justify-between rounded-xl p-4 transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
-                    <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 rounded-lg bg-black/40 p-3">
-                        <Gavel className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">
-                          Freelance_Contract.docx
-                        </h4>
-                        <p className="text-sm text-white/60">
-                          Analyzed 5 days ago
-                        </p>
-                      </div>
-                    </div>
-                    <ChevronRight className="h-5 w-5 text-white/60" />
-                  </div>
-                  <div className="glass-card flex items-center justify-between rounded-xl p-4 transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
-                    <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 rounded-lg bg-black/40 p-3">
-                        <ShieldCheck className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">
-                          NDA_Project_Alpha.pdf
-                        </h4>
-                        <p className="text-sm text-white/60">
-                          Analyzed 1 week ago
-                        </p>
-                      </div>
-                    </div>
-                    <ChevronRight className="h-5 w-5 text-white/60" />
-                  </div>
-                </div>
-              </section>
+      <div>
+        <h3 className="text-lg font-semibold mb-4">Recent Documents</h3>
+        <div className="space-y-3">
+          <div className="flex items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl">
+            <span className="material-symbols-outlined text-2xl mr-4 text-green-500">
+              check_circle
+            </span>
+            <div className="flex-1">
+              <p className="font-medium">Rental_Agreement_Final.pdf</p>
+              <p className="text-xs text-black/60 dark:text-white/60">
+                Analyzed 2 days ago
+              </p>
             </div>
-          )}
-
-          {appState === "loading" && <LoadingState />}
-
-          {appState === "result" && analysisResult && (
-            <AnalysisView result={analysisResult} onReset={handleReset} />
-          )}
-        </main>
+            <button className="p-2 text-black/60 dark:text-white/60">
+              <span className="material-symbols-outlined text-xl">
+                more_vert
+              </span>
+            </button>
+          </div>
+          <div className="flex items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl">
+            <span className="material-symbols-outlined text-2xl mr-4 text-red-500">
+              cancel
+            </span>
+            <div className="flex-1">
+              <p className="font-medium">Freelance_Gig_Terms.txt</p>
+              <p className="text-xs text-black/60 dark:text-white/60">
+                Analysis failed
+              </p>
+            </div>
+            <button className="p-2 text-black/60 dark:text-white/60">
+              <span className="material-symbols-outlined text-xl">
+                more_vert
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
+    </div>
+  );
 
-      {/* Floating Action Button */}
-      <div className="fixed bottom-24 right-6 z-20">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              size="icon"
-              className="h-16 w-16 rounded-full bg-white text-black shadow-lg transition-transform hover:scale-105 hover:bg-gray-200"
-            >
-              <MessageSquare className="h-8 w-8" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="bottom" className="h-screen w-screen flex flex-col p-0 border-0">
-            <Chatbot documentText={documentText} />
-          </SheetContent>
-        </Sheet>
-      </div>
+  return (
+    <div className="flex flex-col h-screen justify-between bg-background text-foreground">
+      <header className="flex items-center justify-between p-4 border-b">
+        <Button variant="ghost" size="icon">
+          <Menu />
+        </Button>
+        <h1 className="text-xl font-bold">Simplify Document</h1>
+        <Button variant="ghost" size="icon">
+          <Bell />
+        </Button>
+      </header>
 
-      <nav className="sticky bottom-0 border-t border-white/10 bg-black/50 backdrop-blur-lg">
-        <div className="flex justify-around py-2">
+      <main className="flex-1 flex flex-col p-6 overflow-y-auto">
+        {appState === "initial" && renderInitialState()}
+        {appState === "loading" && <LoadingState />}
+        {appState === "result" && analysisResult && (
+          <AnalysisView result={analysisResult} onReset={handleReset} />
+        )}
+      </main>
+
+      <div className="fixed bottom-24 right-6">
+         <Sheet>
+           <SheetTrigger asChild>
+             <Button className="bg-primary dark:bg-white text-white dark:text-black rounded-full p-4 shadow-lg hover:bg-black/80 dark:hover:bg-gray-200 transition-transform transform hover:scale-105">
+                <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48"}}>forum</span>
+             </Button>
+           </SheetTrigger>
+           <SheetContent side="bottom" className="h-screen w-screen flex flex-col p-0 border-0" hideClose={true}>
+             <Chatbot documentText={documentText} />
+           </SheetContent>
+         </Sheet>
+       </div>
+
+      <footer className="bg-background border-t sticky bottom-0">
+        <nav className="flex justify-around p-2">
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-white transition-transform duration-200 hover:scale-110"
-            href="/"
-          >
-            <HomeIcon />
-            <span className="text-xs font-medium">Home</span>
-          </a>
-          <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400 transition-transform duration-200 hover:scale-110 hover:text-white"
+            className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary bg-primary/10"
             href="#"
           >
-            <History />
-            <span className="text-xs font-medium">History</span>
+            <span className="material-symbols-outlined">upload</span>
+            <span className="text-xs font-medium">Upload</span>
           </a>
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400 transition-transform duration-200 hover:scale-110 hover:text-white"
+            className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
+            href="#"
+          >
+            <span className="material-symbols-outlined">description</span>
+            <span className="text-xs font-medium">Summaries</span>
+          </a>
+          <a
+            className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
             href="/profile"
           >
-            <User />
-            <span className="text-xs font-medium">Profile</span>
+            <span className="material-symbols-outlined">person</span>
+            <span className="text-xs font-medium">Account</span>
           </a>
-        </div>
-      </nav>
+        </nav>
+      </footer>
     </div>
   );
 }

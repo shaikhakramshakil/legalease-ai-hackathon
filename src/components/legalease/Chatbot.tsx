@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { chatAction } from "@/app/actions";
 import { Loader2, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SheetClose } from "../ui/sheet";
 
 type ChatbotProps = {
   documentText: string;
@@ -60,11 +61,11 @@ export function Chatbot({ documentText }: ChatbotProps) {
   useEffect(() => {
     if(documentText) {
         setMessages([
-            { role: "assistant", content: "I've reviewed your document. How can I help you understand it better?"}
+          { role: "assistant", content: "I've reviewed your document. How can I help you understand it better?"}
         ])
     } else {
         setMessages([
-            { role: "assistant", content: "Please upload a document first. Once a document is analyzed, you can ask me questions about it here."}
+          { role: "assistant", content: "Please upload a document first. Once a document is analyzed, you can ask me questions about it here."}
         ])
     }
   }, [documentText])
@@ -72,9 +73,11 @@ export function Chatbot({ documentText }: ChatbotProps) {
   return (
     <div className="flex flex-col h-full w-full bg-background text-foreground">
       <header className="flex items-center justify-between p-4 border-b">
-        <button className="p-2 -m-2">
-          <span className="material-symbols-outlined">arrow_back_ios_new</span>
-        </button>
+        <SheetClose asChild>
+          <button className="p-2 -m-2">
+            <span className="material-symbols-outlined">arrow_back_ios_new</span>
+          </button>
+        </SheetClose>
         <div className="flex flex-col items-center">
           <h1 className="text-xl font-bold">AI Assistant</h1>
           <span className="text-xs text-green-500 flex items-center gap-1">
@@ -97,7 +100,7 @@ export function Chatbot({ documentText }: ChatbotProps) {
               key={index}
               className={cn(
                 "flex items-start gap-3 max-w-xs",
-                message.role === "user" ? "self-end" : ""
+                message.role === "user" ? "self-end ml-auto" : ""
               )}
             >
               {message.role === 'assistant' && (
@@ -140,7 +143,7 @@ export function Chatbot({ documentText }: ChatbotProps) {
             className="flex-1 bg-black/5 dark:bg-white/10 border-transparent focus:border-primary dark:focus:border-white focus:ring-0 rounded-full py-3 px-5 h-auto"
           />
           <Button type="submit" size="icon" className="bg-primary dark:bg-white text-white dark:text-black rounded-full w-12 h-12 hover:bg-black/80 dark:hover:bg-gray-200 transition-colors shrink-0" disabled={isLoading || !query.trim()}>
-            <Send className="h-5 w-5" />
+            <span className="material-symbols-outlined">send</span>
           </Button>
         </form>
       </footer>
