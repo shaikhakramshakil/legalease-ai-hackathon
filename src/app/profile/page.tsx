@@ -73,7 +73,7 @@ export default function ProfilePage() {
             <div className="space-y-3">
               <div className="glass-card p-3 rounded-lg flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="bg-black/20 p-2 rounded-lg">
+                  <div className="bg-black/40 p-2 rounded-lg">
                     <FileText className="h-5 w-5" />
                   </div>
                   <div>
@@ -87,7 +87,7 @@ export default function ProfilePage() {
               </div>
               <div className="glass-card p-3 rounded-lg flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="bg-black/20 p-2 rounded-lg">
+                  <div className="bg-black/40 p-2 rounded-lg">
                     <Gavel className="h-5 w-5" />
                   </div>
                   <div>
@@ -145,7 +145,7 @@ export default function ProfilePage() {
             <History />
             <span className="text-xs font-medium">History</span>
           </a>
-a          <a
+          <a
             className="flex w-1/3 flex-col items-center justify-center gap-1 text-white"
             href="/profile"
           >
