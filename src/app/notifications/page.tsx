@@ -51,8 +51,8 @@ const notifications = [
 
 export default function NotificationsPage() {
     return (
-        <div className="flex h-screen flex-col bg-background text-foreground">
-            <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center justify-between border-b px-4">
+        <div className="flex h-screen flex-col text-foreground">
+            <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center justify-between glass-card px-4 rounded-b-none">
                 <Link href="/" passHref>
                     <Button variant="ghost" size="icon">
                         <ArrowLeft />
@@ -66,7 +66,7 @@ export default function NotificationsPage() {
                     {notifications.map((notification) => {
                         const Icon = notification.icon;
                         return (
-                            <li key={notification.id} className="group flex cursor-pointer items-start gap-4 p-4 transition-colors hover:bg-accent">
+                            <li key={notification.id} className="group flex cursor-pointer items-start gap-4 p-4 transition-colors glass-card border-none rounded-none hover:bg-white/20">
                                 <div className={cn("mt-1 flex size-10 shrink-0 items-center justify-center rounded-full", notification.bgColor, notification.iconColor)}>
                                     <Icon className="h-5 w-5" />
                                 </div>

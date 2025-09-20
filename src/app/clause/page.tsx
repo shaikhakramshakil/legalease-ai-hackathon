@@ -11,8 +11,8 @@ import { Chatbot } from "@/components/legalease/Chatbot";
 
 export default function ClausePage() {
     return (
-        <div className="flex flex-col h-screen bg-background text-foreground">
-            <header className="bg-background p-4 border-b border-gray-800">
+        <div className="flex flex-col h-screen text-foreground">
+            <header className="sticky top-0 z-10 glass-card p-4 rounded-b-none">
                 <div className="flex items-center">
                     <Link href="/" passHref>
                         <button className="text-foreground p-2 -ml-2">
@@ -29,7 +29,7 @@ export default function ClausePage() {
             <main className="flex-grow overflow-y-auto p-6 space-y-8">
                 <section>
                     <h2 className="text-lg font-semibold text-foreground mb-3">Plain Language Breakdown</h2>
-                    <div className="space-y-4 text-muted-foreground">
+                    <div className="space-y-4 text-muted-foreground glass-card p-4">
                         <p>This section defines how long the agreement lasts and how it can be ended by either you or the other party.</p>
                         <ul className="list-disc list-outside space-y-2 pl-5">
                             <li><strong>Initial Term:</strong> The agreement starts on the effective date and continues for a set period (e.g., one year).</li>
@@ -41,7 +41,7 @@ export default function ClausePage() {
                 </section>
                 <section>
                     <h2 className="text-lg font-semibold text-foreground mb-3">Why is this important?</h2>
-                    <div className="bg-accent p-4 rounded-lg">
+                    <div className="glass-card p-4 rounded-lg">
                         <div className="flex items-start gap-3">
                             <span className="material-symbols-outlined text-yellow-400 mt-1">warning</span>
                             <div>
@@ -53,21 +53,21 @@ export default function ClausePage() {
                 </section>
                 <section>
                     <h2 className="text-lg font-semibold text-foreground mb-3">Example</h2>
-                    <div className="border-l-2 border-foreground pl-4">
+                    <div className="border-l-2 border-foreground pl-4 glass-card p-4">
                         <p className="text-muted-foreground italic">“If this contract is not terminated by December 1st, 2024, it will automatically renew for another year. This means you will be billed for the next year unless you actively cancel.”</p>
                     </div>
                 </section>
                 <section>
                     <h2 className="text-lg font-semibold text-foreground mb-3">Related Clauses</h2>
                     <div className="space-y-3">
-                        <a className="flex justify-between items-center bg-accent p-4 rounded-lg hover:bg-accent/80 transition-colors" href="#">
+                        <a className="flex justify-between items-center glass-card p-4 rounded-lg hover:bg-white/10 transition-colors" href="#">
                             <div>
                                 <h3 className="font-medium text-foreground">Payment Terms</h3>
                                 <p className="text-sm text-muted-foreground">Termination affects final payments.</p>
                             </div>
                             <span className="material-symbols-outlined text-muted-foreground">chevron_right</span>
                         </a>
-                        <a className="flex justify-between items-center bg-accent p-4 rounded-lg hover:bg-accent/80 transition-colors" href="#">
+                        <a className="flex justify-between items-center glass-card p-4 rounded-lg hover:bg-white/10 transition-colors" href="#">
                             <div>
                                 <h3 className="font-medium text-foreground">Confidentiality</h3>
                                 <p className="text-sm text-muted-foreground">Obligations may continue after termination.</p>
@@ -77,7 +77,7 @@ export default function ClausePage() {
                     </div>
                 </section>
             </main>
-            <footer className="sticky bottom-0 bg-background border-t border-border p-4">
+            <footer className="sticky bottom-0 glass-card p-4 rounded-t-none">
                  <Sheet>
                     <SheetTrigger asChild>
                         <Button className="w-full bg-primary text-primary-foreground font-bold py-4 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">

@@ -110,19 +110,19 @@ export default function Home() {
       <div className="my-8">
         <h3 className="text-lg font-semibold mb-3">Or start with a template</h3>
         <div className="grid grid-cols-3 gap-4 text-center">
-          <button onClick={handleUseSample} className="flex flex-col items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+          <button onClick={handleUseSample} className="flex flex-col items-center p-3 glass-card hover:bg-white/20 transition-colors">
             <span className="material-symbols-outlined text-3xl mb-1">
               gavel
             </span>
             <span className="text-xs font-medium">NDA</span>
           </button>
-          <button onClick={handleUseSample} className="flex flex-col items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+          <button onClick={handleUseSample} className="flex flex-col items-center p-3 glass-card hover:bg-white/20 transition-colors">
             <span className="material-symbols-outlined text-3xl mb-1">
               real_estate_agent
             </span>
             <span className="text-xs font-medium">Lease</span>
           </button>
-          <button onClick={handleUseSample} className="flex flex-col items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl hover:bg-black/10 dark:hover-bg-white/20 transition-colors">
+          <button onClick={handleUseSample} className="flex flex-col items-center p-3 glass-card hover:bg-white/20 transition-colors">
             <span className="material-symbols-outlined text-3xl mb-1">
               work
             </span>
@@ -134,33 +134,33 @@ export default function Home() {
       <div>
         <h3 className="text-lg font-semibold mb-4">Recent Documents</h3>
         <div className="space-y-3">
-          <div className="flex items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl">
+          <div className="flex items-center p-3 glass-card">
             <span className="material-symbols-outlined text-2xl mr-4 text-green-500">
               check_circle
             </span>
             <div className="flex-1">
               <p className="font-medium">Rental_Agreement_Final.pdf</p>
-              <p className="text-xs text-black/60 dark:text-white/60">
+              <p className="text-xs text-white/60">
                 Analyzed 2 days ago
               </p>
             </div>
-            <button className="p-2 text-black/60 dark:text-white/60">
+            <button className="p-2 text-white/60">
               <span className="material-symbols-outlined text-xl">
                 more_vert
               </span>
             </button>
           </div>
-          <div className="flex items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl">
+          <div className="flex items-center p-3 glass-card">
             <span className="material-symbols-outlined text-2xl mr-4 text-red-500">
               cancel
             </span>
             <div className="flex-1">
               <p className="font-medium">Freelance_Gig_Terms.txt</p>
-              <p className="text-xs text-black/60 dark:text-white/60">
+              <p className="text-xs text-white/60">
                 Analysis failed
               </p>
             </div>
-            <button className="p-2 text-black/60 dark:text-white/60">
+            <button className="p-2 text-white/60">
               <span className="material-symbols-outlined text-xl">
                 more_vert
               </span>
@@ -172,9 +172,9 @@ export default function Home() {
   );
 
   return (
-    <div className="flex flex-col h-screen justify-between bg-background text-foreground">
+    <div className="flex flex-col h-screen justify-between text-foreground">
      {appState !== 'risk-alert' && appState !== 'result' && (
-      <header className="flex items-center justify-between p-4 border-b">
+      <header className="flex items-center justify-between p-4 glass-card rounded-b-none">
          <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
             <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
@@ -217,7 +217,7 @@ export default function Home() {
           <div className="fixed bottom-24 right-6">
             <Sheet>
               <SheetTrigger asChild>
-                <Button className="bg-primary dark:bg-white text-white dark:text-black rounded-full p-4 shadow-lg hover:bg-black/80 dark:hover:bg-gray-200 transition-transform transform hover:scale-105">
+                <Button className="glass-card rounded-full p-4 shadow-lg hover:bg-white/20 transition-transform transform hover:scale-105">
                     <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48"}}>forum</span>
                 </Button>
               </SheetTrigger>
@@ -227,7 +227,7 @@ export default function Home() {
             </Sheet>
           </div>
 
-          <footer className="bg-background border-t sticky bottom-0">
+          <footer className="glass-card sticky bottom-0 rounded-t-none">
             <nav className="flex justify-around p-2">
               <Link
                 href="/"

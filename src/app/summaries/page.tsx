@@ -177,8 +177,8 @@ export default function SummariesPage() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm">
+    <div className="flex flex-col h-screen text-foreground">
+      <header className="sticky top-0 z-10 glass-card rounded-b-none">
         <div className="flex items-center p-4">
           <Link href="/" passHref>
             <Button variant="ghost" size="icon" className="-ml-2">
@@ -199,7 +199,7 @@ export default function SummariesPage() {
                 <Input
                     placeholder="Search summaries"
                     type="search"
-                    className="w-full rounded-full border-transparent bg-accent pl-10 pr-10 py-3 h-auto"
+                    className="w-full rounded-full border-transparent glass-card pl-10 pr-10 py-3 h-auto"
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                 />
@@ -212,7 +212,7 @@ export default function SummariesPage() {
         <div className="flex gap-2 py-3 overflow-x-auto" style={{scrollbarWidth: 'none'}}>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="rounded-full shrink-0 border-accent bg-accent hover:bg-accent/80">
+                    <Button variant="outline" className="rounded-full shrink-0 glass-card hover:bg-white/20">
                         <span>Document Type</span>
                         <ChevronDown className="h-4 w-4 ml-1" />
                     </Button>
@@ -234,7 +234,7 @@ export default function SummariesPage() {
 
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="rounded-full shrink-0 border-accent bg-accent hover:bg-accent/80" disabled>
+                    <Button variant="outline" className="rounded-full shrink-0 glass-card hover:bg-white/20" disabled>
                         <span>Date</span>
                         <ChevronDown className="h-4 w-4 ml-1" />
                     </Button>
@@ -243,7 +243,7 @@ export default function SummariesPage() {
 
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="rounded-full shrink-0 border-accent bg-accent hover:bg-accent/80">
+                    <Button variant="outline" className="rounded-full shrink-0 glass-card hover:bg-white/20">
                         <span>Risk Level</span>
                         <ChevronDown className="h-4 w-4 ml-1" />
                     </Button>
@@ -287,7 +287,7 @@ export default function SummariesPage() {
             const Icon = config.icon;
             return (
               <Link href="/" key={summary.id} className="block">
-                <div className="bg-accent p-4 rounded-xl flex flex-col gap-3 transition-colors hover:bg-accent/80">
+                <div className="glass-card p-4 rounded-xl flex flex-col gap-3 transition-colors hover:bg-white/20">
                     <div className="flex justify-between items-start">
                         <h3 className="font-bold text-base text-foreground pr-4">{summary.title}</h3>
                         <span className={`flex items-center justify-center gap-1.5 text-sm font-medium w-28 py-1 rounded-full ${config.color}`}>
@@ -312,7 +312,7 @@ export default function SummariesPage() {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm border-t border-border">
+      <footer className="fixed bottom-0 left-0 right-0 glass-card rounded-t-none">
         <nav className="flex justify-around py-2">
           <Link
             href="/"
