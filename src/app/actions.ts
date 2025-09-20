@@ -3,6 +3,7 @@
 import { summarizeLegalDocument } from '@/ai/flows/summarize-legal-document';
 import { highlightRiskyClauses } from '@/ai/flows/highlight-risky-clauses';
 import { translateLegalSummary } from '@/ai/flows/translate-legal-summary';
+import { chatWithDocument } from '@/ai/flows/chat-with-document';
 import { z } from 'zod';
 
 const AnalyzeDocumentResponseSchema = z.object({
@@ -51,4 +52,21 @@ export async function translateSummaryAction(englishSummary: string) {
         console.error("Error in translateSummaryAction:", error);
         throw new Error("Failed to translate summary due to a server error.");
     }
+}
+
+export async function chatAction(documentText: string, query: string) {
+  if (!documentText) {
+    throw new Error("Document text cannot be empty.");
+  }
+  if (!query) {
+    throw new Error("Query cannot be empty.");
+  }
+
+  try {
+    const result = await chatWithDocument({ documentText, query });
+    return result.answer;
+  } catch (error) {
+    console.error("Error in chatAction:", error);
+    throw new Error("Failed to get chat response due to a server error.");
+  }
 }

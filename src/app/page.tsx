@@ -25,6 +25,14 @@ import {
 import { analyzeDocumentAction } from "./actions";
 import { sampleLegalText } from "@/lib/legal-text";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Chatbot } from "@/components/legalease/Chatbot";
 
 type AppState = "initial" | "loading" | "error" | "result";
 
@@ -33,12 +41,14 @@ export default function Home() {
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(
     null
   );
+  const [documentText, setDocumentText] = useState<string>("");
   const { toast } = useToast();
 
   const handleAnalyze = async (file: File) => {
     setAppState("loading");
     try {
       const text = await file.text();
+      setDocumentText(text);
       const result = await analyzeDocumentAction(text);
       setAnalysisResult(result);
       setAppState("result");
@@ -58,6 +68,7 @@ export default function Home() {
   const handleUseSample = async () => {
     setAppState("loading");
     try {
+      setDocumentText(sampleLegalText);
       const result = await analyzeDocumentAction(sampleLegalText);
       setAnalysisResult(result);
       setAppState("result");
@@ -77,6 +88,7 @@ export default function Home() {
   const handleReset = () => {
     setAppState("initial");
     setAnalysisResult(null);
+    setDocumentText("");
   };
 
   return (
@@ -192,12 +204,22 @@ export default function Home() {
 
       {/* Floating Action Button */}
       <div className="fixed bottom-24 right-6 z-20">
-        <Button
-          size="icon"
-          className="h-16 w-16 rounded-full bg-white text-black shadow-lg transition-transform hover:scale-105 hover:bg-gray-200"
-        >
-          <MessageSquare className="h-8 w-8" />
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              size="icon"
+              className="h-16 w-16 rounded-full bg-white text-black shadow-lg transition-transform hover:scale-105 hover:bg-gray-200"
+            >
+              <MessageSquare className="h-8 w-8" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="bottom" className="h-[90vh] flex flex-col rounded-t-2xl">
+            <SheetHeader className="text-left">
+              <SheetTitle>AI Legal Assistant</SheetTitle>
+            </SheetHeader>
+            <Chatbot documentText={documentText} />
+          </SheetContent>
+        </Sheet>
       </div>
 
       <nav className="sticky bottom-0 border-t border-white/10 bg-black/50 backdrop-blur-lg">
