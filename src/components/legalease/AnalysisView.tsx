@@ -18,14 +18,14 @@ type AnalysisViewProps = {
 };
 
 const riskMapping: { [key: string]: { title: string, icon: string, color: string } } = {
-  red: { title: "High Risk", icon: "gpp_bad", color: "text-red-500" },
-  orange: { title: "Medium Risk", icon: "warning", color: "text-orange-500" },
-  yellow: { title: "Low Risk", icon: "verified_user", color: "text-yellow-500" },
+  high: { title: "High Risk", icon: "gpp_bad", color: "text-high" },
+  medium: { title: "Medium Risk", icon: "warning", color: "text-medium" },
+  low: { title: "Low Risk", icon: "verified_user", color: "text-low" },
 };
 
 type Clause = {
   type: 'safe' | 'risk';
-  riskLevel?: 'red' | 'orange' | 'yellow';
+  riskLevel?: 'high' | 'medium' | 'low';
   title: string;
   explanation: string;
   content: string;
@@ -35,21 +35,20 @@ const parseHighlightedText = (text: string): Clause[] => {
   if (!text) return [];
 
   const clauses: Clause[] = [];
-  const parts = text.split(/(<(red|yellow|orange)>.*?<\/(?:red|yellow|orange)>)/gs);
+  const parts = text.split(/(<(high|medium|low)>.*?<\/(?:high|medium|low)>)/gs);
 
-  let isSafeBlock = true;
   let safeContentBuffer = "";
 
   for (const part of parts) {
     if (!part) continue;
 
-    const riskMatch = part.match(/<(red|yellow|orange)>(.*?)<\/(?:red|yellow|orange)>/s);
+    const riskMatch = part.match(/<(high|medium|low)>(.*?)<\/(?:high|medium|low)>/s);
     if (riskMatch) {
       if (safeContentBuffer.trim()) {
         clauses.push({ type: 'safe', title: 'Standard Clause', explanation: 'This is a standard clause with no identified risks.', content: safeContentBuffer.trim() });
         safeContentBuffer = "";
       }
-      const riskLevel = riskMatch[1] as 'red' | 'yellow' | 'orange';
+      const riskLevel = riskMatch[1] as 'high' | 'medium' | 'low';
       const content = riskMatch[2].trim();
       clauses.push({
         type: 'risk',
@@ -93,8 +92,8 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
   const riskyClausesCount = clauses.filter(c => c.type === 'risk').length;
   
   const overallRisk = useMemo(() => {
-    const hasHigh = clauses.some(c => c.riskLevel === 'red');
-    const hasMedium = clauses.some(c => c.riskLevel === 'orange');
+    const hasHigh = clauses.some(c => c.riskLevel === 'high');
+    const hasMedium = clauses.some(c => c.riskLevel === 'medium');
     if (hasHigh) return { level: 'High', color: 'high', width: '100%', count: riskyClausesCount };
     if (hasMedium) return { level: 'Medium', color: 'medium', width: '66.66%', count: riskyClausesCount };
     return { level: 'Low', color: 'low', width: '33.33%', count: riskyClausesCount };
@@ -150,7 +149,7 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
           </div>
           <div className="flex items-center gap-3">
             <div className={`flex items-center justify-center size-12 rounded-full bg-${overallRisk.color}/10 text-${overallRisk.color}`}>
-              <span className="material-symbols-outlined text-3xl"> {clauses.some(c => c.riskLevel === 'red') ? 'gpp_bad' : 'warning'} </span>
+              <span className="material-symbols-outlined text-3xl"> {clauses.some(c => c.riskLevel === 'high') ? 'gpp_bad' : 'warning'} </span>
             </div>
             <div>
               <p className="text-2xl font-bold text-foreground">{overallRisk.level} Risk</p>
