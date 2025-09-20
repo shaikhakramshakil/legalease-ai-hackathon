@@ -52,7 +52,7 @@ export default function ProfilePage() {
           <section className="mb-6">
             <h2 className="text-xl font-bold mb-3">Quick Actions</h2>
             <div className="grid grid-cols-2 gap-3">
-              <button className="flex flex-col items-center justify-center gap-2 py-4 px-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm">
+              <button className="flex flex-col items-center justify-center gap-2 py-4 px-3 rounded-lg bg-gray-800 text-white font-semibold text-sm">
                 <UploadCloud className="h-8 w-8" />
                 <span>Upload New</span>
               </button>
