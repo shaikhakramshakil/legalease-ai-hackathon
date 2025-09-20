@@ -20,14 +20,6 @@ import {
 } from "@/components/ui/sheet";
 import { Chatbot } from "@/components/legalease/Chatbot";
 import { AppSidebar } from "@/components/legalease/AppSidebar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 
 
@@ -193,23 +185,14 @@ export default function Home() {
             </SheetContent>
         </Sheet>
         <h1 className="text-xl font-bold">LegalEase AI</h1>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+        <Link href="/notifications" passHref>
+          <Button variant="ghost" size="icon" asChild>
             <div className="relative">
-              <Button variant="ghost" size="icon">
                 <Bell className="h-6 w-6" />
-              </Button>
               <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></div>
             </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Notifications</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>New document analyzed: NDA_v2.pdf</DropdownMenuItem>
-            <DropdownMenuItem>Risk found in "Employment Contract.docx"</DropdownMenuItem>
-            <DropdownMenuItem>Summary for "Lease_Agreement.pdf" is ready</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          </Button>
+        </Link>
       </header>
       )}
 
@@ -273,5 +256,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
