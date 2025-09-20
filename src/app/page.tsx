@@ -183,7 +183,7 @@ export default function Home() {
                 <AppSidebar />
             </SheetContent>
         </Sheet>
-        <h1 className="text-xl font-bold">Simplify Document</h1>
+        <h1 className="text-xl font-bold">LegalEase AI</h1>
         <Button variant="ghost" size="icon">
           <Bell />
         </Button>
