@@ -60,7 +60,7 @@ export function AppFooter({ onFileSelect }: AppFooterProps) {
                     href={item.href}
                     className={cn(
                         "flex flex-col items-center justify-center gap-1 h-16 w-20 rounded-full text-muted-foreground transition-all duration-300 relative",
-                        isActive ? "text-primary" : "hover:text-primary"
+                        !isActive && "hover:text-primary"
                     )}
                     >
                     {isActive && (
@@ -68,12 +68,12 @@ export function AppFooter({ onFileSelect }: AppFooterProps) {
                     )}
                     <div className="relative z-10 flex flex-col items-center gap-1">
                         <span
-                        className="material-symbols-outlined"
+                        className={cn("material-symbols-outlined", isActive && "text-primary")}
                         style={{ fontVariationSettings: isActive ? "'FILL' 1" : "" }}
                         >
                         {item.icon}
                         </span>
-                        <span className="text-xs font-medium">{item.label}</span>
+                        <span className={cn("text-xs font-medium", isActive && "text-primary")}>{item.label}</span>
                     </div>
                     </Link>
                 );
@@ -91,7 +91,7 @@ export function AppFooter({ onFileSelect }: AppFooterProps) {
                     href={item.href}
                     className={cn(
                         "flex flex-col items-center justify-center gap-1 h-16 w-20 rounded-full text-muted-foreground transition-all duration-300 relative",
-                        isActive ? "text-primary" : "hover:text-primary"
+                        !isActive && "hover:text-primary"
                     )}
                     >
                     {isActive && (
@@ -99,12 +99,12 @@ export function AppFooter({ onFileSelect }: AppFooterProps) {
                     )}
                     <div className="relative z-10 flex flex-col items-center gap-1">
                         <span
-                        className="material-symbols-outlined"
+                        className={cn("material-symbols-outlined", isActive && "text-primary")}
                         style={{ fontVariationSettings: isActive ? "'FILL' 1" : "" }}
                         >
                         {item.icon}
                         </span>
-                        <span className="text-xs font-medium">{item.label}</span>
+                        <span className={cn("text-xs font-medium", isActive && "text-primary")}>{item.label}</span>
                     </div>
                     </Link>
                 );
