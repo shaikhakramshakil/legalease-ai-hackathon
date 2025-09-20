@@ -22,21 +22,21 @@ export default function Home() {
       <nav className="sticky bottom-0 border-t border-white/10 bg-black/50 backdrop-blur-lg">
         <div className="flex justify-around py-2">
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-white"
+            className="flex w-1/3 flex-col items-center justify-center gap-1 text-white transition-transform duration-200 hover:scale-110"
             href="/"
           >
             <HomeIcon />
             <span className="text-xs font-medium">Home</span>
           </a>
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400"
+            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400 transition-transform duration-200 hover:scale-110 hover:text-white"
             href="#"
           >
             <History />
             <span className="text-xs font-medium">History</span>
           </a>
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400"
+            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400 transition-transform duration-200 hover:scale-110 hover:text-white"
             href="/profile"
           >
             <User />

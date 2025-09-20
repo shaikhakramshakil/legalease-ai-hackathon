@@ -27,7 +27,7 @@ export default function ProfilePage() {
               <h1 className="text-lg font-bold">Alex</h1>
             </div>
           </div>
-          <button className="flex h-12 w-12 items-center justify-center text-gray-400">
+          <button className="flex h-12 w-12 items-center justify-center text-gray-400 transition-colors hover:text-white">
             <Settings className="h-6 w-6" />
           </button>
         </header>
@@ -35,15 +35,15 @@ export default function ProfilePage() {
         <main className="px-4 pb-4">
           <section className="mb-6">
             <div className="grid grid-cols-3 gap-3">
-              <div className="glass-card p-3 rounded-lg text-center">
+              <div className="glass-card p-3 rounded-lg text-center transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
                 <p className="text-xs text-muted-foreground">Docs Scanned</p>
                 <p className="text-xl font-bold">142</p>
               </div>
-              <div className="glass-card p-3 rounded-lg text-center">
+              <div className="glass-card p-3 rounded-lg text-center transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
                 <p className="text-xs text-muted-foreground">Risks Identified</p>
                 <p className="text-xl font-bold">89</p>
               </div>
-              <div className="glass-card p-3 rounded-lg text-center">
+              <div className="glass-card p-3 rounded-lg text-center transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
                 <p className="text-xs text-muted-foreground">Hours Saved</p>
                 <p className="text-xl font-bold">35</p>
               </div>
@@ -53,11 +53,11 @@ export default function ProfilePage() {
           <section className="mb-6">
             <h2 className="text-xl font-bold mb-3">Quick Actions</h2>
             <div className="grid grid-cols-2 gap-3">
-              <button className="flex flex-col items-center justify-center gap-2 py-4 px-3 rounded-lg bg-gray-900/50 text-white font-semibold text-sm">
+              <button className="flex flex-col items-center justify-center gap-2 py-4 px-3 rounded-lg bg-gray-900/50 text-white font-semibold text-sm transition-transform duration-200 hover:scale-105 hover:bg-gray-900/70">
                 <UploadCloud className="h-8 w-8" />
                 <span>Upload New</span>
               </button>
-              <button className="flex flex-col items-center justify-center gap-2 py-4 px-3 rounded-lg glass-card font-semibold text-sm">
+              <button className="flex flex-col items-center justify-center gap-2 py-4 px-3 rounded-lg glass-card font-semibold text-sm transition-transform duration-200 hover:scale-105 hover:bg-gray-900/70">
                 <MessageSquare className="h-8 w-8" />
                 <span>Access Chatbot</span>
               </button>
@@ -67,12 +67,12 @@ export default function ProfilePage() {
           <section className="mb-6">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-xl font-bold">Recent Activity</h2>
-              <a className="text-sm font-medium text-gray-400" href="#">
+              <a className="text-sm font-medium text-gray-400 transition-colors hover:text-white" href="#">
                 View All
               </a>
             </div>
             <div className="space-y-3">
-              <div className="glass-card p-3 rounded-lg flex items-center justify-between">
+              <div className="glass-card p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
                 <div className="flex items-center gap-3">
                   <div className="bg-black/40 p-2 rounded-lg">
                     <FileText className="h-5 w-5" />
@@ -86,7 +86,7 @@ export default function ProfilePage() {
                 </div>
                 <ChevronRight className="text-gray-400" />
               </div>
-              <div className="glass-card p-3 rounded-lg flex items-center justify-between">
+              <div className="glass-card p-3 rounded-lg flex items-center justify-between transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
                 <div className="flex items-center gap-3">
                   <div className="bg-black/40 p-2 rounded-lg">
                     <Gavel className="h-5 w-5" />
@@ -117,21 +117,21 @@ export default function ProfilePage() {
       <nav className="sticky bottom-0 border-t border-white/10 bg-black/50 backdrop-blur-lg">
         <div className="flex justify-around py-2">
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400"
+            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400 transition-transform duration-200 hover:scale-110 hover:text-white"
             href="/"
           >
             <HomeIcon />
             <span className="text-xs font-medium">Home</span>
           </a>
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400"
+            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400 transition-transform duration-200 hover:scale-110 hover:text-white"
             href="#"
           >
             <History />
             <span className="text-xs font-medium">History</span>
           </a>
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-white"
+            className="flex w-1/3 flex-col items-center justify-center gap-1 text-white transition-transform duration-200 hover:scale-110"
             href="/profile"
           >
             <User />
