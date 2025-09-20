@@ -28,6 +28,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 
 type AppState = "initial" | "loading" | "error" | "result" | "risk-alert";
@@ -187,7 +188,7 @@ export default function Home() {
                     <Menu className="h-6 w-6" />
                 </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-80 p-0">
+            <SheetContent side="left" className="w-[83.333333%] p-0">
                 <AppSidebar />
             </SheetContent>
         </Sheet>
@@ -244,27 +245,27 @@ export default function Home() {
 
           <footer className="bg-background border-t sticky bottom-0">
             <nav className="flex justify-around p-2">
-              <a
-                className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary"
+              <Link
                 href="/"
+                className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary"
               >
                 <span className="material-symbols-outlined">home</span>
                 <span className="text-xs font-medium">Home</span>
-              </a>
-              <a
+              </Link>
+              <Link
+                href="/summaries"
                 className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
-                href="#"
               >
                 <span className="material-symbols-outlined">description</span>
                 <span className="text-xs font-medium">Summaries</span>
-              </a>
-              <a
-                className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
+              </Link>
+              <Link
                 href="/profile"
+                className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
               >
                 <span className="material-symbols-outlined">person</span>
                 <span className="text-xs font-medium">Account</span>
-              </a>
+              </Link>
             </nav>
           </footer>
         </>
@@ -272,9 +273,5 @@ export default function Home() {
     </div>
   );
 }
-
-    
-
-    
 
     
