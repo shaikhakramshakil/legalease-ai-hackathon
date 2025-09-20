@@ -3,9 +3,9 @@
 
 import { useState, useMemo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { translateSummaryAction } from "@/app/actions";
 import { Loader2 } from "lucide-react";
 import type { KeyRisk } from "./RiskAlertView";
+import Link from 'next/link';
 
 export type AnalysisResult = {
   summary: string;
@@ -72,22 +72,7 @@ const parseHighlightedText = (text: string): Clause[] => {
 
 
 export function AnalysisView({ result, onReset }: AnalysisViewProps) {
-  const [hindiSummary, setHindiSummary] = useState<string | null>(null);
-  const [isTranslating, setIsTranslating] = useState(false);
   const detailsRefs = useRef<(HTMLDetailsElement | null)[]>([]);
-
-  const handleTranslate = async () => {
-    if (hindiSummary || isTranslating) return;
-    setIsTranslating(true);
-    try {
-      const translated = await translateSummaryAction(result.summary);
-      setHindiSummary(translated);
-    } catch (error) {
-      console.error("Translation failed:", error);
-    } finally {
-      setIsTranslating(false);
-    }
-  };
 
   const clauses = useMemo(() => parseHighlightedText(result.highlightedText), [result.highlightedText]);
   const riskyClausesCount = clauses.filter(c => c.type === 'risk').length;
@@ -161,23 +146,17 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
 
         <h2 className="text-xl font-bold text-foreground mb-4">Plain-Language Summary</h2>
         <div className="text-muted-foreground leading-relaxed mb-8">
-            {isTranslating ? (
-              <div className="flex items-center justify-center">
-                <Loader2 className="h-6 w-6 animate-spin text-primary" />
-              </div>
-            ) : hindiSummary ? (
-                <p className="font-sans">{hindiSummary}</p>
-            ) : (
-                <p>{result.summary}</p>
-            )}
+            <p>{result.summary}</p>
         </div>
 
 
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-foreground">Key Clauses</h2>
-          <button onClick={handleTranslate} className="p-2 -m-2 text-primary">
-            <span className="material-symbols-outlined"> translate </span>
-          </button>
+          <Link href="/summary/hindi">
+            <button className="p-2 -m-2 text-primary">
+                <span className="material-symbols-outlined"> translate </span>
+            </button>
+          </Link>
         </div>
 
         <div className="space-y-4">
