@@ -181,7 +181,7 @@ export default function Home() {
                     <Menu className="h-6 w-6" />
                 </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[320px] p-0 bg-transparent border-0">
+            <SheetContent side="left" className="w-[83.33%] p-0 bg-transparent border-0">
                 <AppSidebar />
             </SheetContent>
         </Sheet>

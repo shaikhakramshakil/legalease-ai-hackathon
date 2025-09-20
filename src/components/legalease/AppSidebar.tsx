@@ -23,7 +23,7 @@ export function AppSidebar() {
   const userAvatar = PlaceHolderImages.find(p => p.id === 'user-avatar');
 
   return (
-    <div className="flex flex-col h-full bg-white/5 backdrop-blur-lg text-foreground p-4 shadow-2xl rounded-r-xl">
+    <div className="flex flex-col h-full bg-white/5 backdrop-blur-lg text-foreground p-4 shadow-2xl rounded-r-2xl">
       <div className="p-4 pb-2 flex items-center gap-4">
         {userAvatar && (
             <Image
