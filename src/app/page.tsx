@@ -9,6 +9,9 @@ import {
   History,
   Home as HomeIcon,
   User,
+  ChevronRight,
+  ShieldCheck,
+  Gavel,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -22,7 +25,7 @@ export default function Home() {
         <main className="px-4 pb-24">
           {/* Upload Document Section */}
           <section className="mb-8">
-            <div className="relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/30 bg-transparent p-8 text-center">
+            <div className="relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/30 bg-transparent p-8 text-center transition-all duration-300 hover:border-white/50 hover:bg-white/5">
               <FileUp className="mb-4 h-12 w-12 text-white" />
               <h2 className="text-xl font-bold">Upload Your Document</h2>
               <p className="mb-6 text-sm text-white/60">
@@ -81,8 +84,45 @@ export default function Home() {
 
           {/* Recent Documents Section */}
           <section>
-            <h3 className="text-lg font-semibold">Recent Documents</h3>
-            {/* Recent documents list will go here */}
+            <h3 className="mb-4 text-lg font-semibold">Recent Documents</h3>
+            <div className="space-y-3">
+              <div className="glass-card flex items-center justify-between rounded-xl p-4 transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 rounded-lg bg-black/40 p-3">
+                    <FileText className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Tenancy_Agreement_v2.pdf</h4>
+                    <p className="text-sm text-white/60">Analyzed 2 days ago</p>
+                  </div>
+                </div>
+                <ChevronRight className="h-5 w-5 text-white/60" />
+              </div>
+              <div className="glass-card flex items-center justify-between rounded-xl p-4 transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 rounded-lg bg-black/40 p-3">
+                    <Gavel className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Freelance_Contract.docx</h4>
+                    <p className="text-sm text-white/60">Analyzed 5 days ago</p>
+                  </div>
+                </div>
+                <ChevronRight className="h-5 w-5 text-white/60" />
+              </div>
+              <div className="glass-card flex items-center justify-between rounded-xl p-4 transition-all duration-300 hover:border-white/20 hover:bg-gray-900/70">
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 rounded-lg bg-black/40 p-3">
+                    <ShieldCheck className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">NDA_Project_Alpha.pdf</h4>
+                    <p className="text-sm text-white/60">Analyzed 1 week ago</p>
+                  </div>
+                </div>
+                <ChevronRight className="h-5 w-5 text-white/60" />
+              </div>
+            </div>
           </section>
         </main>
       </div>
