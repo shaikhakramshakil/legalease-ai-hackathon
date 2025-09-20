@@ -184,9 +184,12 @@ export default function Home() {
             </SheetContent>
         </Sheet>
         <h1 className="text-xl font-bold">LegalEase AI</h1>
-        <Button variant="ghost" size="icon">
-          <Bell />
-        </Button>
+        <div className="relative">
+          <Button variant="ghost" size="icon">
+            <Bell />
+          </Button>
+          <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></div>
+        </div>
       </header>
       )}
 
@@ -250,5 +253,7 @@ export default function Home() {
     </div>
   );
 }
+
+    
 
     
