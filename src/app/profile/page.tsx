@@ -19,7 +19,7 @@ export default function ProfilePage() {
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col text-white">
       
-      <div className="relative z-10 flex-grow">
+      <div className="relative z-10 flex-grow pb-24">
         <header className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">
@@ -119,7 +119,7 @@ export default function ProfilePage() {
         </main>
       </div>
 
-      <nav className="sticky bottom-0 border-t border-white/10 bg-black/50 backdrop-blur-lg">
+      <nav className="fixed bottom-0 left-0 right-0 border-t border-white/10 bg-black/50 backdrop-blur-lg">
         <div className="flex justify-around py-2">
           <a
             className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400 transition-transform duration-200 hover:scale-110 hover:text-white"

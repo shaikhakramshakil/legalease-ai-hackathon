@@ -190,7 +190,7 @@ export default function SummariesPage() {
         </div>
       </header>
 
-      <main className="flex-1 overflow-y-auto px-4">
+      <main className="flex-1 overflow-y-auto px-4 pb-24">
         <div className="py-3">
             <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -281,7 +281,7 @@ export default function SummariesPage() {
             </div>
         </div>
 
-        <div className="space-y-4 pb-24">
+        <div className="space-y-4">
           {filteredSummaries.map(summary => {
             const config = riskConfig[summary.risk as keyof typeof riskConfig];
             const Icon = config.icon;
@@ -340,5 +340,3 @@ export default function SummariesPage() {
     </div>
   );
 }
-
-    
