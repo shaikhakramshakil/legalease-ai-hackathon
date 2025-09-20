@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Menu, Bell } from "lucide-react";
@@ -225,8 +226,8 @@ export default function Home() {
                 className="flex flex-col items-center gap-1 p-2 rounded-lg text-primary bg-primary/10"
                 href="/"
               >
-                <span className="material-symbols-outlined">upload</span>
-                <span className="text-xs font-medium">Upload</span>
+                <span className="material-symbols-outlined">home</span>
+                <span className="text-xs font-medium">Home</span>
               </a>
               <a
                 className="flex flex-col items-center gap-1 p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
