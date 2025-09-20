@@ -11,7 +11,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="relative flex h-auto min-h-screen w-full flex-col bg-gradient-to-br from-background to-secondary text-foreground">
+    <div className="relative flex h-auto min-h-screen w-full flex-col bg-black text-white">
       <div className="flex-grow">
         <AppHeader />
         <main className="px-4 pb-4">
@@ -19,24 +19,24 @@ export default function Home() {
           <Recents />
         </main>
       </div>
-      <nav className="sticky bottom-0 border-t border-white/20 bg-black/10 backdrop-blur-lg">
+      <nav className="sticky bottom-0 border-t border-white/10 bg-black/50 backdrop-blur-lg">
         <div className="flex justify-around py-2">
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-primary-foreground"
+            className="flex w-1/3 flex-col items-center justify-center gap-1 text-white"
             href="#"
           >
             <HomeIcon />
             <span className="text-xs font-medium">Home</span>
           </a>
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-muted-foreground"
+            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400"
             href="#"
           >
             <History />
             <span className="text-xs font-medium">History</span>
           </a>
           <a
-            className="flex w-1/3 flex-col items-center justify-center gap-1 text-muted-foreground"
+            className="flex w-1/3 flex-col items-center justify-center gap-1 text-gray-400"
             href="#"
           >
             <User />

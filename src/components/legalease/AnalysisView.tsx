@@ -73,7 +73,7 @@ const parseHighlightedText = (text: string): ReactNode[] => {
                 {part}
               </span>
             </PopoverTrigger>
-            <PopoverContent className="w-80">
+            <PopoverContent className="w-80 glass-card">
               <div className="flex items-start gap-3">
                 <div className="mt-1">{riskInfo.icon}</div>
                 <div className="grid gap-1.5">
@@ -134,7 +134,7 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
       </div>
 
       <div className="grid md:grid-cols-2 gap-8">
-        <Card className="h-[70vh]">
+        <Card className="h-[70vh] glass-card">
           <CardHeader>
             <CardTitle>Full Document</CardTitle>
           </CardHeader>
@@ -147,7 +147,7 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
           </CardContent>
         </Card>
 
-        <Card className="h-[70vh]">
+        <Card className="h-[70vh] glass-card">
           <CardHeader>
             <CardTitle>Key Insights</CardTitle>
           </CardHeader>
