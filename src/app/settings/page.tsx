@@ -140,14 +140,14 @@ export default function SettingsPage() {
 
             <footer className="fixed bottom-0 left-0 right-0 glass-card rounded-t-none">
                 <div className="flex justify-around py-2 px-4">
-                    <Link href="/" className="flex flex-col items-center gap-1 text-muted-foreground">
+                    <Link href="/" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
                         <span className="material-symbols-outlined">upload_file</span>
                         <span className="text-xs">Upload</span>
                     </Link>
-                    <a className="flex flex-col items-center gap-1 text-muted-foreground" href="#">
+                    <Link href="/summaries" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
                         <span className="material-symbols-outlined">description</span>
                         <span className="text-xs">Summaries</span>
-                    </a>
+                    </Link>
                     <Link href="/profile" className="flex flex-col items-center gap-1 text-primary">
                         <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>person</span>
                         <span className="text-xs font-bold">Account</span>

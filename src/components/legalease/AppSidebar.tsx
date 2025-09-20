@@ -23,7 +23,7 @@ export function AppSidebar() {
   const userAvatar = PlaceHolderImages.find(p => p.id === 'user-avatar');
 
   return (
-    <div className="flex flex-col h-full bg-white/5 backdrop-blur-lg text-foreground p-4 shadow-2xl">
+    <div className="flex flex-col h-full bg-white/5 backdrop-blur-lg text-foreground p-4 shadow-2xl rounded-r-xl">
       <div className="p-4 pb-2 flex items-center gap-4">
         {userAvatar && (
             <Image
@@ -65,7 +65,7 @@ export function AppSidebar() {
           <li>
             <Link
               className="flex items-center gap-4 rounded-lg px-4 py-3 text-muted-foreground hover:bg-white/10 dark:hover:bg-primary/20 hover:text-primary dark:hover:text-primary"
-              href="#"
+              href="/summaries"
             >
               <span className="material-symbols-outlined">history</span>
               <span className="font-medium text-sm">Past Summaries</span>

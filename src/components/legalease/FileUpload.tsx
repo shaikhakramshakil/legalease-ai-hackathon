@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useRef, type DragEvent } from "react";
@@ -36,7 +37,7 @@ export function FileUpload({ onAnalyze, onUseSample }: FileUploadProps) {
   return (
     <div className="mb-8">
       <div 
-        className="relative flex flex-col items-center justify-center p-8 border-2 border-dashed border-black/50 dark:border-white/50 rounded-2xl bg-black/5 dark:bg-white/5"
+        className="relative flex flex-col items-center justify-center p-8 border-2 border-dashed border-white/50 rounded-xl bg-white/5"
         onDragEnter={(e) => {e.preventDefault(); e.stopPropagation();}}
         onDragLeave={(e) => {e.preventDefault(); e.stopPropagation();}}
         onDragOver={(e) => {e.preventDefault(); e.stopPropagation();}}
@@ -49,18 +50,18 @@ export function FileUpload({ onAnalyze, onUseSample }: FileUploadProps) {
             accept={acceptedFileTypes}
             onChange={(e) => handleFileChange(e.target.files?.[0] || null)}
         />
-        <span className="material-symbols-outlined text-6xl text-primary dark:text-white mb-4">
+        <span className="material-symbols-outlined text-6xl text-white mb-4">
           upload_file
         </span>
         <h2 className="text-xl font-bold mb-2">Upload Your Document</h2>
-        <p className="text-sm text-center text-black/60 dark:text-white/60 mb-6">
+        <p className="text-sm text-center text-white/60 mb-6">
           Let our AI clarify jargon, highlight risks, and provide
           easy-to-understand explanations.
         </p>
         <Button onClick={handleButtonClick} className="w-full">
             Select file to upload
         </Button>
-        <p className="text-xs text-black/50 dark:text-white/50 mt-4">
+        <p className="text-xs text-white/50 mt-4">
           PDF, DOCX, TXT accepted
         </p>
       </div>

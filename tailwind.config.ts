@@ -1,3 +1,4 @@
+
 import type {Config} from 'tailwindcss';
 
 export default {
@@ -70,9 +71,9 @@ export default {
         risk: '#dc2626',
       },
       borderRadius: {
-        lg: '0.75rem',
-        xl: '1rem',
-        '2xl': '1.25rem',
+        lg: 'var(--radius)',
+        xl: 'calc(var(--radius) + 4px)',
+        '2xl': 'calc(var(--radius) + 10px)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },

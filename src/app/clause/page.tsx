@@ -41,7 +41,7 @@ export default function ClausePage() {
                 </section>
                 <section>
                     <h2 className="text-lg font-semibold text-foreground mb-3">Why is this important?</h2>
-                    <div className="glass-card p-4 rounded-lg">
+                    <div className="glass-card p-4">
                         <div className="flex items-start gap-3">
                             <span className="material-symbols-outlined text-yellow-400 mt-1">warning</span>
                             <div>
@@ -60,14 +60,14 @@ export default function ClausePage() {
                 <section>
                     <h2 className="text-lg font-semibold text-foreground mb-3">Related Clauses</h2>
                     <div className="space-y-3">
-                        <a className="flex justify-between items-center glass-card p-4 rounded-lg hover:bg-white/10 transition-colors" href="#">
+                        <a className="flex justify-between items-center glass-card p-4 hover:bg-white/10 transition-colors" href="#">
                             <div>
                                 <h3 className="font-medium text-foreground">Payment Terms</h3>
                                 <p className="text-sm text-muted-foreground">Termination affects final payments.</p>
                             </div>
                             <span className="material-symbols-outlined text-muted-foreground">chevron_right</span>
                         </a>
-                        <a className="flex justify-between items-center glass-card p-4 rounded-lg hover:bg-white/10 transition-colors" href="#">
+                        <a className="flex justify-between items-center glass-card p-4 hover:bg-white/10 transition-colors" href="#">
                             <div>
                                 <h3 className="font-medium text-foreground">Confidentiality</h3>
                                 <p className="text-sm text-muted-foreground">Obligations may continue after termination.</p>
