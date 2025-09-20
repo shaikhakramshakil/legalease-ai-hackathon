@@ -135,7 +135,7 @@ export function AnalysisView({ result, onReset }: AnalysisViewProps) {
       </header>
 
       <main className="flex-1 px-5 pt-6 pb-24 overflow-y-auto">
-        <div className="mb-8 p-6 rounded-xl bg-card">
+        <div className="mb-8 p-6 rounded-xl bg-accent border">
           <h2 className="text-sm font-semibold uppercase text-muted-foreground tracking-wider mb-4">Overall Risk Level</h2>
           <div className="mb-6">
             <div className={`relative h-2 bg-muted rounded-full`}>
