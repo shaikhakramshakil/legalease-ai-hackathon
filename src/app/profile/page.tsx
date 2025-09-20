@@ -11,6 +11,7 @@ import {
   Home as HomeIcon,
   History,
 } from "lucide-react";
+import { TrendingTopicsChart } from "@/components/legalease/TrendingTopicsChart";
 
 export default function ProfilePage() {
   return (
@@ -108,23 +109,7 @@ export default function ProfilePage() {
             <h2 className="text-xl font-bold mb-3">
               Trending Legal Topics
             </h2>
-            <div className="glass-card p-4 rounded-lg">
-              <div className="flex items-end h-32">
-                <div className="flex-1 h-2/3 bg-muted rounded-t-sm mx-1"></div>
-                <div className="flex-1 h-full bg-muted rounded-t-sm mx-1"></div>
-                <div className="flex-1 h-1/2 bg-muted rounded-t-sm mx-1"></div>
-                <div className="flex-1 h-3/4 bg-primary/80 rounded-t-sm mx-1"></div>
-                <div className="flex-1 h-2/5 bg-muted rounded-t-sm mx-1"></div>
-                <div className="flex-1 h-1/3 bg-muted rounded-t-sm mx-1"></div>
-                <div className="flex-1 h-4/5 bg-muted rounded-t-sm mx-1"></div>
-              </div>
-              <div className="flex justify-between mt-2 text-xs text-muted-foreground">
-                <span>Data Privacy</span>
-                <span>IP Rights</span>
-                <span className="font-bold text-foreground">AI Ethics</span>
-                <span>Contracts</span>
-              </div>
-            </div>
+            <TrendingTopicsChart />
           </section>
         </main>
       </div>
