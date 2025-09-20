@@ -179,7 +179,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen justify-between bg-background text-foreground">
-     {appState !== 'risk-alert' && (
+     {appState !== 'risk-alert' && appState !== 'result' && (
       <header className="flex items-center justify-between p-4 border-b">
          <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
             <SheetTrigger asChild>
@@ -272,5 +272,7 @@ export default function Home() {
     </div>
   );
 }
+
+    
 
     
