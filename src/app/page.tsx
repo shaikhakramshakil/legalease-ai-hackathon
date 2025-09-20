@@ -21,6 +21,7 @@ import {
 import { Chatbot } from "@/components/legalease/Chatbot";
 import { AppSidebar } from "@/components/legalease/AppSidebar";
 import Link from "next/link";
+import { Logo } from "@/components/legalease/Logo";
 
 
 type AppState = "initial" | "loading" | "error" | "result" | "risk-alert";
@@ -121,7 +122,7 @@ export default function Home() {
             </span>
             <span className="text-xs font-medium">Lease</span>
           </button>
-          <button onClick={handleUseSample} className="flex flex-col items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+          <button onClick={handleUseSample} className="flex flex-col items-center p-3 bg-black/5 dark:bg-white/10 rounded-xl hover:bg-black/10 dark:hover-bg-white/20 transition-colors">
             <span className="material-symbols-outlined text-3xl mb-1">
               work
             </span>
@@ -184,7 +185,7 @@ export default function Home() {
                 <AppSidebar />
             </SheetContent>
         </Sheet>
-        <h1 className="text-xl font-bold">LegalEase AI</h1>
+        <Logo />
         <Link href="/notifications" passHref>
           <Button variant="ghost" size="icon" asChild>
             <div className="relative">
